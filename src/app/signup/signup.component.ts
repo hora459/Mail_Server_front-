@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { ApiserveService } from '../service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private service:ApiserveService,private http:HttpClient,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -15,7 +18,6 @@ export class SignupComponent implements OnInit {
  valid=true;
 
 signup(mail1:any,pass1:any){
-
 if(this.checkEmail(mail1)==false){
 alert('email can only consists of numbers or letter or _');
 }
@@ -28,7 +30,15 @@ alert('password has to be more than 8 letters or numbers');
 }
 else {
   mail1+='@mail.com'
-  alert('sha8al');
+  this.service.sign_up(mail1,pass1).subscribe(res=>{
+    if(res=='found'){
+      alert('email is taken choose another email')
+    }
+    else{
+      this.router.navigate(['/SignIn']);
+    }
+  })
+  
 }
 
 }
@@ -54,6 +64,7 @@ checkEmail(mail2:any){
     this.valid=true;
     return valid1
 }
+
 
 //   return this.http.get("http://localhost:8080/"+"file1/"+email2+"/"+password2,{responseType:'text'});
 }

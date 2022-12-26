@@ -18,7 +18,14 @@ export class ApiserveService {
   
   path:String='';
   constructor(private http: HttpClient) { }
+  
   check2(email2:String, password2:String){
+    return this.http.get("http://localhost:8080/"+"file1/"+email2+"/"+password2,{responseType:'text'});
+  }
+  sign_up(email2:String, password2:String){
+    return this.http.get("http://localhost:8080/"+"file/"+email2+"/"+password2,{responseType:'text'});
+  }
+  sign_in(email2:String, password2:String){
     return this.http.get("http://localhost:8080/"+"file1/"+email2+"/"+password2,{responseType:'text'});
   }
 }

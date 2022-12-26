@@ -10,7 +10,7 @@
     
     <div class="loginbox">
         
-     <form> 
+    <form> 
     <h1>Sign Up</h1>
     <label>first name:</label>
     <input type="text" placeholder="enter your first name">
@@ -19,13 +19,13 @@
     <br>
     <label>email:</label>
     <br>
-    <input type="email" #mail placeholder="enter your email">
+    <input type="text"  placeholder="enter your email" #mail>
     <label>password:</label>
-    <input type="password" #pass placeholder="enter password">
-    <input type="submit" (click)="signup(mail,pass)" name="" value="signup">
+    <input type="password" placeholder="enter password" #pass>
+    </form>
+    <input type="submit" (click)="signup(mail.value,pass.value)" name="" value="signup">  
     <label>already have an account? </label>
     <a routerLink="/SignIn">login</a>
-    </form>  
     </div>
     
 </body>

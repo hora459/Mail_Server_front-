@@ -7,20 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-<!-- Kkf -->
+    
     <div class="loginbox">
         
      <form> 
     <h1>Sign In</h1>
     <label>email:</label>
     <br>
-    <input type="text" placeholder="enter your email">
+    <input type="text" placeholder="enter your email" #mail>
     <label>password:</label>
-    <input type="password" placeholder="enter password">
-    <input type="submit" name="" value="signin">
+    <input type="password" placeholder="enter password" #pass>
+    </form>
+    <input type="submit" name="" value="signin" (click)="sign_in(mail,pass)">
     <label>don't have an account? </label>
     <a routerLink="/signup">sign up</a>
-    </form>  
     </div>
     
 </body>

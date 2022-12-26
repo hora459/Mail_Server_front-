@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="loginbox">
+        
+     <form> 
+    <h1>Sign Up</h1>
+    <label>first name:</label>
+    <input type="text" placeholder="enter your first name">
+    <label>last name:</label>
+    <input type="text" placeholder="enter your last name">
+    <br>
+    <label>email:</label>
+    <br>
+    <input type="email" #mail placeholder="enter your email">
+    <label>password:</label>
+    <input type="password" #pass placeholder="enter password">
+    <input type="submit" (click)="signup(mail,pass)" name="" value="signup">
+    <label>already have an account? </label>
+    <a routerLink="/SignIn">login</a>
+    </form>  
+    </div>
+    
+</body>
+</html>

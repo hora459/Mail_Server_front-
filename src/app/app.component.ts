@@ -13,7 +13,7 @@ export class AppComponent {
   title = 'mail_server';
   
   constructor(private drawit : ApiserveService, private http: HttpClient, private modalservice: NgbModal,private router:Router) {
-  this.router.navigate(["/signup"]) 
+  this.router.navigate(["/compose"]) 
   }
 
   

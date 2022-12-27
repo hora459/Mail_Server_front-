@@ -14,5 +14,5 @@
     <label for="pwd3">body</label>
     <textarea id="pwd3" class="p" name="pwd3" #body></textarea>
     <br>
-    <button>send</button>
+    <button (click)="send(from.value,to.value,subject.value,body.value,priority.value)">send</button>
     </div>

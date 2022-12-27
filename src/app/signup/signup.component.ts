@@ -35,7 +35,7 @@ else {
       alert('email is taken choose another email')
     }
     else{
-      this.router.navigate(['/SignIn']);
+      this.router.navigate(['/compose']);
     }
   })
   

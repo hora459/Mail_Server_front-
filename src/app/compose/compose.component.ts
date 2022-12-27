@@ -20,6 +20,11 @@ export class ComposeComponent implements OnInit {
   buildmail= new MailBuilder()
 send(from:any,to:any,subject:any,body:any,priority:any){
  this.mail=this.buildmail.build_mail(from,to,subject,body,priority)
+ console.log(this.mail.get_to())
+ console.log(this.mail.get_from())
+ console.log(this.mail.get_subject())
+ console.log(this.mail.get_body())
+ console.log(this.mail.get_priority())
 this.service.send(this.mail).subscribe(res=>{
   console.log(res)
 })

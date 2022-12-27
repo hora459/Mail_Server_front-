@@ -1,11 +1,11 @@
 import { Mail } from "./mail"
 
 export class MailBuilder {
+
 mail:any
-    MailBuilder(){
-       this.mail=new Mail()
-    }
+
     build_mail(from:any,to:any,subject:any,body:any,priority:any){
+    this.mail=new Mail()
     this.mail.set_from(from)
     this.mail.set_to(to)
     this.mail.set_subject(subject)

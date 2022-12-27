@@ -32,6 +32,6 @@ export class ApiserveService {
   //   return this.http.get("http://localhost:8080/"+"file2/"+from+"/"+to+"/"+subject+"/"+body,{responseType:'text'});
   // }
   send(mail:any): Observable<any>{
-    return this.http.post<any>(`${environment.api_url}/file2`,mail);
+    return this.http.post<any>(`${environment.api_url}file2`,mail);
   }
 }

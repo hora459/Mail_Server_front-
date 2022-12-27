@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { ApiserveService } from '../service';
 import { Router } from '@angular/router';
+import { Mail } from '../mail';
+import { FormBuilder } from '@angular/forms';
+import { MailBuilder } from '../mail-builder';
 @Component({
   selector: 'app-compose',
   templateUrl: './compose.component.html',
@@ -13,7 +16,12 @@ export class ComposeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-send(from:any,to:any,subject:any,body:any){
-this.service.send(from,to,subject,body).subscribe(res=>{console.log(res)});
+  mail:any
+  buildmail= new MailBuilder()
+send(from:any,to:any,subject:any,body:any,priority:any){
+ this.mail=this.buildmail.build_mail(from,to,subject,body,priority)
+this.service.send(this.mail).subscribe(res=>{
+  console.log(res)
+})
 }
 }

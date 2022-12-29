@@ -28,9 +28,7 @@ export class ApiserveService {
   sign_in(email2:String, password2:String){
     return this.http.get("http://localhost:8080/"+"file1/"+email2+"/"+password2,{responseType:'text'});
   }
-  // send(from:any,to:any,subject:any,body:any,priority:any){
-  //   return this.http.get("http://localhost:8080/"+"file2/"+from+"/"+to+"/"+subject+"/"+body,{responseType:'text'});
-  // }
+ 
   send(mail:any): Observable<any>{
     return this.http.post<any>(`${environment.api_url}file2`,mail);
   }

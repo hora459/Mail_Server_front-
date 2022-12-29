@@ -8,9 +8,8 @@
 </head>
 <body>
     
-    <div class="loginbox">
-        
-     <form> 
+    <div class="loginbox">    
+    <form>
     <h1>Sign In</h1>
     <label>email:</label>
     <br>
@@ -18,7 +17,7 @@
     <label>password:</label>
     <input type="password" placeholder="enter password" #pass>
     </form>
-    <input type="submit" name="" value="signin" (click)="sign_in(mail,pass)">
+    <input type="submit" name="" value="signin" (click)="sign_in(mail.value,pass.value)">
     <label>don't have an account? </label>
     <a routerLink="/signup">sign up</a>
     </div>

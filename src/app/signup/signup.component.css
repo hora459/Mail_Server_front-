@@ -5,8 +5,8 @@ body{
     font-family: sans-serif;
 }
 .loginbox{
-    width: 320px;
-    height: 550px;
+    width: 500px;
+    height: 450px;
     background: #000;
     color: #fff;
     top: 50%;
@@ -16,6 +16,10 @@ body{
     box-sizing:border-box ;
     padding: 70px 30px;
     border-radius: 30px;
+}
+.signupemail{
+display: flex;
+
 }
 h1{
     margin: 0;

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { ApiserveService } from '../service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -35,7 +36,7 @@ else {
       alert('email is taken choose another email')
     }
     else{
-      this.router.navigate(['/compose']);
+      this.router.navigate(['/SignIn']);
     }
   })
   
@@ -64,7 +65,8 @@ checkEmail(mail2:any){
     this.valid=true;
     return valid1
 }
+test(){
 
+}
 
-//   return this.http.get("http://localhost:8080/"+"file1/"+email2+"/"+password2,{responseType:'text'});
 }

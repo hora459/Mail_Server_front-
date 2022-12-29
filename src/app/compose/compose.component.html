@@ -1,6 +1,6 @@
 <div class="loginbox">
     <label for="pwd">from</label>
-    <input type="text" id="pwd1" value="mado@mail.com" name="pwd" #from readonly>
+    <input type="text" id="pwd1" value={{currentuser}} name="pwd" #from readonly>
     <br><br>
     <label for="pwd1">to</label>
     <input type="text" id="pwd1" name="pwd1" #to>
@@ -14,5 +14,8 @@
     <label for="pwd3">body</label>
     <textarea id="pwd3" class="p" name="pwd3" #body></textarea>
     <br>
-    <button (click)="send(from.value,to.value,subject.value,body.value,priority.value)">send</button>
+    <button (click)="send(to.value,subject.value,body.value,priority.value,attachment.files)">send</button>
+    <br>
+    <label for="file">Choose file to upload</label>
+    <input type="file" id="file" name="file" multiple #attachment/>
     </div>

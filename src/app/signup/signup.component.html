@@ -10,19 +10,17 @@
     
     <div class="loginbox">
         
-    <form> 
+    
     <h1>Sign Up</h1>
-    <label>first name:</label>
-    <input type="text" placeholder="enter your first name">
-    <label>last name:</label>
-    <input type="text" placeholder="enter your last name">
-    <br>
+
     <label>email:</label>
     <br>
+    <div class="signupemail">
     <input type="text"  placeholder="enter your email" #mail>
+    <input  type="text" class="form-control" value="@mail.com" id="yaamail" readonly>
+    </div>
     <label>password:</label>
     <input type="password" placeholder="enter password" #pass>
-    </form>
     <input type="submit" (click)="signup(mail.value,pass.value)" name="" value="signup">  
     <label>already have an account? </label>
     <a routerLink="/SignIn">login</a>

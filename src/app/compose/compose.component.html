@@ -17,5 +17,6 @@
     <button (click)="send(to.value,subject.value,body.value,priority.value,attachment.files)">send</button>
     <br>
     <label for="file">Choose file to upload</label>
-    <input type="file" id="file" name="file" multiple #attachment/>
+    <input type="file" id="file" name="file" (change)="openwindow()" multiple accept="all" #attachment/>
+    <button (click)="delete()">X</button>
     </div>

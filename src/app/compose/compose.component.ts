@@ -15,9 +15,9 @@ export class ComposeComponent implements OnInit {
 
   constructor(private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService) { }
 currentuser= this.userservice.currentuser
+fileurl='C:\\trial\\photo_2022-12-06_21-43-51.jpg'
   ngOnInit(): void {
   }
-  list:any[]=[]
   formData =new FormData();
   mail:any
   buildmail= new MailBuilder()
@@ -34,16 +34,19 @@ send(to:any,subject:any,body:any,priority:any,attachment:any){
 //   // if successful
 //   this.userservice.id++;
 // })
-console.log(attachment)
 for(const w of attachment){
   this.formData.append('attachment',w);
-  console.log(w)
-  this.list.push(w)
 }
-console.log(this.list)
-this.service.send(this.list).subscribe(res=>{
-  this.list=[]
+console.log(this.formData)
+this.service.send(this.formData).subscribe(res=>{
+  this.formData =new FormData();
   console.log(res)
 })
+}
+delete(){
+  this.formData =new FormData();
+}
+openwindow(){
+  window.open(this.fileurl);
 }
 }

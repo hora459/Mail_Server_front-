@@ -6,6 +6,14 @@ private body=''
 private priority=0
 private id=0
 private attachment:any
+set_attachment(attachment:any)
+{
+    this.attachment=attachment;
+}
+get_attachments()
+{
+    return this.attachment
+}
 set_from(from:any){
 this.from=from
 }

@@ -42,7 +42,7 @@ for(const w of attachment){
 }
 console.log(this.list)
 this.service.send(this.list).subscribe(res=>{
-  
+  this.list=[]
   console.log(res)
 })
 }

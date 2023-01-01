@@ -65,8 +65,6 @@ checkEmail(mail2:any){
     this.valid=true;
     return valid1
 }
-test(){
 
-}
 
 }

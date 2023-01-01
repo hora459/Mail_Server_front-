@@ -26,7 +26,7 @@ constructor(private service:ApiserveService,private http:HttpClient,private rout
          }
          else{
           this.userservice.currentuser=mail
-           this.router.navigate(['/compose']);
+           this.router.navigate(['/homepage']);
          }
         console.log(res)
       })

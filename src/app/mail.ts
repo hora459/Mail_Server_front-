@@ -4,15 +4,14 @@ private to=''
 private subject=''
 private body=''
 private priority=0
-private id=0
-private attachment:any
+private attachments:any
 set_attachment(attachment:any)
 {
-    this.attachment=attachment;
+    this.attachments=attachment;
 }
 get_attachments()
 {
-    return this.attachment
+    return this.attachments
 }
 set_from(from:any){
 this.from=from
@@ -44,10 +43,5 @@ set_priority(priority:any){
 get_priority(){
 return this.priority
 }
-set_id(id:any){
-    this.id=id
-    }
-get_id(){
-return this.id
-}
+
 }

@@ -27,7 +27,21 @@ export class ApiserveService {
     return this.http.get("http://localhost:8080/"+"signin/"+email2+"/"+password2,{responseType:'text'});
   }
  
-  send(list:any): Observable<any>{
-    return this.http.post<any>(`${environment.api_url}attachment`,list);
+  send(list:any,to:any,from:any): Observable<any>{
+    return this.http.post<any>(`${environment.api_url}attachments/${to}/${from}`,list);
+  }
+  send1(mail:any): Observable<any>{
+    return this.http.post<any>(`${environment.api_url}mailling`,mail);
+  }
+  getfile(filename:any,to:any):Observable<any>
+  {
+    return this.http.get("http://localhost:8080/"+"getfiles/"+filename+"/"+to,{responseType:'blob'});
+  }
+  show(filename:any,email:any): Observable<any>{
+    return this.http.post<any>(`${environment.api_url}homepage/${filename}/${email}`,null);
+  }
+  addfile(filename:any,email:any){
+    
+    return this.http.get("http://localhost:8080/"+"af/"+filename+"/",{responseType:'text'});
   }
 }

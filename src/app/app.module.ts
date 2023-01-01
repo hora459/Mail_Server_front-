@@ -7,11 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpHandler, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomepageComponent } from './homepage/homepage.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
    routingComponents,
+   HomepageComponent,
+   SidebarComponent,
   ],
   imports: [
     BrowserModule,

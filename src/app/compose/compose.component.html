@@ -1,4 +1,19 @@
+<div class="att">
+    <div class="Attach">
+    <input type="file" (change)="select($event)" style="display: none;" #fileInput>
+    <button class="fathy" (click)="fileInput.click()">ahmed</button>
+    </div>
+    <div class="labels" *ngFor="let file of attachedFileName;let i = index">
+        <div >
+            <a id="{{ file }}" [href]="attachedFileUrl[i]" target="_blank" style="display: inline;">{{file}}</a>
+            <button (click)="remove(i)">x</button>
+        </div>
+
+    </div>
+    
+ </div>
 <div class="loginbox">
+    <button (click)="show()">show</button>
     <label for="pwd">from</label>
     <input type="text" id="pwd1" value={{currentuser}} name="pwd" #from readonly>
     <br><br>
@@ -17,6 +32,5 @@
     <button (click)="send(to.value,subject.value,body.value,priority.value,attachment.files)">send</button>
     <br>
     <label for="file">Choose file to upload</label>
-    <input type="file" id="file" name="file" (change)="openwindow()" multiple accept="all" #attachment/>
-    <button (click)="delete()">X</button>
+    <input type="file" id="file" name="file" multiple #attachment/>
     </div>

@@ -30,7 +30,7 @@ export class ApiserveService {
   send(list:any,to:any,from:any): Observable<any>{
     return this.http.post<any>(`${environment.api_url}attachments/${to}/${from}`,list);                       
   }
-  send1(mail:any): Observable<any>{
+  send_mail(mail:any): Observable<any>{
     return this.http.post<any>(`${environment.api_url}mailing`,mail);
   }
   getfile(filename:any,to:any):Observable<any>

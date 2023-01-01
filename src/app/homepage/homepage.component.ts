@@ -20,6 +20,9 @@ currentemails:Mail[]=[];
   ngOnInit(): void {
 
   }
+  attachedFileName: String[] = []
+  attachedFileUrl: any[] = []
+  
   show(array:any){
     console.log(array)
     console.log(this.currentemails)

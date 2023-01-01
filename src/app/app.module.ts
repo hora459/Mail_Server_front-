@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule,routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
 import { HttpHandler, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
+import { Form } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +22,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+    FormsModule,
     BrowserAnimationsModule
   ],
   providers: [HttpClient],

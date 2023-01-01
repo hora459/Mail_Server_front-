@@ -1,36 +1,34 @@
-<div class="att">
-    <div class="Attach">
-    <input type="file" (change)="select($event)" style="display: none;" #fileInput>
-    <button class="fathy" (click)="fileInput.click()">ahmed</button>
-    </div>
-    <div class="labels" *ngFor="let file of attachedFileName;let i = index">
-        <div >
-            <a id="{{ file }}" [href]="attachedFileUrl[i]" target="_blank" style="display: inline;">{{file}}</a>
-            <button (click)="remove(i)">x</button>
-        </div>
-
-    </div>
-    
- </div>
 <div class="loginbox">
     <button (click)="show()">show</button>
     <label for="pwd">from</label>
     <input type="text" id="pwd1" value={{currentuser}} name="pwd" #from readonly>
     <br><br>
     <label for="pwd1">to</label>
-    <input type="text" id="pwd1" name="pwd1" #to>
+    <input type="text" multiple [(ngModel)]="to" id="pwd1" name="pwd1" >
     <br><br>
     <label for="pwd2">Subject</label>
-    <input type="text" id="pwd2" name="pwd2"#subject>
+    <input type="text" [(ngModel)]="subject" id="pwd2" name="pwd2">
     <br><br>
     <label for="pwd4">enter priority from 1 to 5</label>
-    <input type="text" id="pwd4" name="pwd4"#priority>
+    <input type="text" [(ngModel)]="priority" id="pwd4" name="pwd4">
     <br><br>
     <label for="pwd3">body</label>
-    <textarea id="pwd3" class="p" name="pwd3" #body></textarea>
+    <textarea id="pwd3" [(ngModel)]="body" class="p" name="pwd3"></textarea>
     <br>
-    <button (click)="send(to.value,subject.value,body.value,priority.value,attachment.files)">send</button>
+    <button (click)="send()">send</button>
     <br>
-    <label for="file">Choose file to upload</label>
-    <input type="file" id="file" name="file" multiple #attachment/>
+    <div class="att">
+        <div class="Attach">
+        <input type="file" (change)="select($event)" style="display: none;" #fileInput>
+        <button class="fathy" (click)="fileInput.click()">ahmed</button>
+        </div>
+        <div class="labels" *ngFor="let file of attachedFileName;let i = index">
+            <div >
+                <a id="{{ file }}" [href]="attachedFileUrl[i]" target="_blank" style="display: inline;">{{file}}</a>
+                <button (click)="remove(i)">x</button>
+            </div>
+    
+        </div>
+        
+     </div>
     </div>

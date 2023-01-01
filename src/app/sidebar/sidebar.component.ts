@@ -22,9 +22,8 @@ export class SidebarComponent implements OnInit {
     this.folders= [{"name":"Inbox" ,"mailIds":[0,1,8]},
     {"name": "Sent" ,"mailIds":[3,4] },
     {"name": "Drafts" ,"mailIds":[4,6] },
-    {"name": "Trash" ,"mailIds":[7] },
-    {"name": "All-mails" ,"mailIds":[0,1,2,3,4,5,6,7,8]
-  }];
+    {"name": "Trash" ,"mailIds":[7] }
+  ];
   }
   ngOnInit(): void {
   
@@ -66,11 +65,8 @@ export class SidebarComponent implements OnInit {
   
 Selectfolder(fname:string){
     this.service.show(fname,this.userservice.currentuser).subscribe((res:Mail[])=>{
-      console.log(res[0])
       this.userservice.currentmails=res;
       this.currfolder=fname;
-      console.log('wael')
-      console.log(this.userservice.currentmails)
   this.homepage.show(this.userservice.currentmails);
     });
   
@@ -81,7 +77,7 @@ Deletefolder(){
   if(this.currfolder==""){
     alert("No Folder is selected!");
   }
-  else if(this.currfolder=="All-mails"||this.currfolder=="Inbox"||this.currfolder=="Drafts"||this.currfolder=="Sent"||this.currfolder=="Trash"){
+  else if(this.currfolder=="Inbox"||this.currfolder=="Drafts"||this.currfolder=="Sent"||this.currfolder=="Trash"){
     alert("The Selected Folder Cannot Be Deleted");
   }
   else{
@@ -91,6 +87,7 @@ Deletefolder(){
     this.folders.splice(indexOfObject,1);
     this.currfolder="";
     alert("Folder Deleted Successfully");
+    
   }
 }
 Renamefolder(fname:string){

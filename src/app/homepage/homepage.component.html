@@ -2,11 +2,18 @@
     <app-sidebar></app-sidebar>
     <div class="section two">
         <div  *ngFor = "let email of currentemails" >
-            <label >hello{{email.get_from()}}</label>
-            <label >{{email.get_to()}}</label>
-            <label >{{email.get_priority()}}</label>
-            <label >{{email.get_subject()}}</label>
-            <label >{{email.get_body()}}</label>
+            <label >hello{{email.from}}</label>
+            <label >{{email.to}}</label>
+            <label >{{email.priority}}</label>
+            <label >{{email.subject}}</label>
+            <label >{{email.body}}</label>
+            <label >{{email.date}}</label>
+            <div class="labels" *ngFor="let file of attachedFileName;let i = index">
+                <div >
+                    <a id="{{ file }}" [href]="attachedFileUrl[i]" target="_blank" style="display: inline;">{{file}}</a>
+                </div>
+        
+            </div>
             <br><br>
         </div> 
     </div>

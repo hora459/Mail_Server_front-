@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Mail } from './mail';
 
 @Injectable({
   providedIn: 'root'
@@ -6,5 +7,6 @@ import { Injectable } from '@angular/core';
 export class CurrentuseService {
   currentuser=''
   id=0
+  currentmails:Mail[]=[]
   constructor() { }
 }

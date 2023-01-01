@@ -24,7 +24,7 @@
    
   
       <div class="nav-list" id="nav-list" *ngFor = "let folder of folders" > 
-        <a  (click)="Selectfolder(folder.name)" routerLink="/folder/{{folder.name}}" routerLinkActive="active current"><img alt ="add" src="./assets/img/inbox.png"><span class="Name">{{folder.name}}</span><span class="count">{{folder.mailIds.length}}</span></a>
+        <a  (click)="Selectfolder(folder.name)" routerLink="/homepage" routerLinkActive="active current"><img alt ="add" src="./assets/img/inbox.png"><span class="Name">{{folder.name}}</span><span class="count">{{folder.mailIds.length}}</span></a>
       </div>
     <div  style="display: flex; ">
     <div class="FOLDER">

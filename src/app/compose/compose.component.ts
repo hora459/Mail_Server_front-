@@ -15,7 +15,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ComposeComponent implements OnInit {
 
   constructor(private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService,public sanitizer:DomSanitizer) { }
-currentuser= this.userservice.currentuser
+currentuser= this.userservice.currentuser;
   ngOnInit(): void {
   }
   attachedFile:File[]=[]

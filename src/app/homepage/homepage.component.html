@@ -1,5 +1,15 @@
 <div class="main">
     <app-sidebar></app-sidebar>
-    <div class="section two">Section 2</div>
+    <div class="section two">
+        <div  *ngFor = "let email of currentemails" >
+            <label >hello{{email.get_from()}}</label>
+            <label >{{email.get_to()}}</label>
+            <label >{{email.get_priority()}}</label>
+            <label >{{email.get_subject()}}</label>
+            <label >{{email.get_body()}}</label>
+            <br><br>
+        </div> 
+    </div>
+    
     </div>
     

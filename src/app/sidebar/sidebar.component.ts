@@ -5,6 +5,8 @@ import { ApiserveService } from '../service';
 import { Router } from '@angular/router';
 import { CurrentuseService } from '../currentuse.service';
 import {Ifolder} from '../Ifolder';
+import { HomepageComponent } from '../homepage/homepage.component';
+import { Mail } from '../mail';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -13,11 +15,10 @@ import {Ifolder} from '../Ifolder';
 export class SidebarComponent implements OnInit {
 
   folders!: Ifolder[];
-  currentmails!:any[];
   newFolderName:String="";
   closeResult: string | undefined;
   currfolder:string="";
-  constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService) { 
+  constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService,private homepage:HomepageComponent) { 
     this.folders= [{"name":"Inbox" ,"mailIds":[0,1,8]},
     {"name": "Sent" ,"mailIds":[3,4] },
     {"name": "Drafts" ,"mailIds":[4,6] },
@@ -27,28 +28,6 @@ export class SidebarComponent implements OnInit {
   }
   ngOnInit(): void {
   
-  }
-  showA(){
-    if (document.getElementById("addn")!.style.display=="block"){
-      document.getElementById("addn")!.style.display="none";
-      document.getElementById("addin")!.style.display="none";
-    }
-    else{
-      document.getElementById("addn")!.style.display="block";
-      document.getElementById("addin")!.style.display="block";
-  
-    }
-  }
-  showB(){
-    if (document.getElementById("rename")!.style.display=="block"){
-      document.getElementById("rename")!.style.display="none";
-      document.getElementById("renamein")!.style.display="none";
-    }
-    else{
-      document.getElementById("rename")!.style.display="block";
-      document.getElementById("renamein")!.style.display="block";
-  
-    }
   }
 
   addfile(filename:string){
@@ -86,12 +65,17 @@ export class SidebarComponent implements OnInit {
 
   
 Selectfolder(fname:string){
-    this.service.show(fname,this.userservice.currentuser).subscribe(res=>{
-      this.currentmails=res;
+    this.service.show(fname,this.userservice.currentuser).subscribe((res:Mail[])=>{
+      console.log(res[0])
+      this.userservice.currentmails=res;
+      this.currfolder=fname;
+      console.log('wael')
+      console.log(this.userservice.currentmails)
+  this.homepage.show(this.userservice.currentmails);
     });
-    this.currfolder=fname;
-
-  }
+  
+}
+  
 Deletefolder(){
   console.log(this.currfolder);
   if(this.currfolder==""){

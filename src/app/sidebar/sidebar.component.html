@@ -7,13 +7,13 @@
           </a>
         </div>
         <div class="sidebuttons">
-          <a style="width: 60px; border-radius: 80px;"><img style="margin-left: 9px;" alt ="Reload" src="./assets/img/refresh-512.webp">
-            <span class="tooltiptext">Refresh</span></a>
+          <a (click)="reload()" style="width: 60px; border-radius: 80px;" ><img  style="margin-left: 9px;" alt ="Reload" src="./assets/img/refresh-512.webp">
+            <span class="tooltiptext"  >Refresh</span></a>
         </div>
       </div>
   
       <div class="nav-list" id="nav-list" *ngFor = "let folder of folders" > 
-        <a  (click)="Selectfolder(folder.name)" routerLink="/homepage" routerLinkActive="active current"><img alt ="add" src="./assets/img/inbox.png"><span class="Name">{{folder.name}}</span><span class="count">{{folder.mailIds.length}}</span></a>
+        <a  (click)="Selectfolder(folder.name)" routerLink="/homepage" routerLinkActive="active current"><img alt ="add" src="./assets/img/inbox.png"><span class="Name">{{folder.name}}</span><span class="count">{{folder.mailIds}}</span></a>
       </div>
     <div  style="display: flex; ">
     <div class="FOLDER">

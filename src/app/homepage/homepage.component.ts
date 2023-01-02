@@ -22,22 +22,36 @@ export class HomepageComponent implements OnInit {
 currentemails:Mail[]=[];
 search=''
 option:string="";
+sortoption:string="";
+searchoption:string=""
+checkes:boolean[]=[]
+
    ngOnInit(): void {
 
   }
   attachedFileName: String[] = []
   attachedFileUrl: any[] = []
+  selectsearchorsortoption(event:any){
+    if(this.option=='Search'){
+      this.searchoption=event.target.value
+      alert(this.searchoption)
+    }
+    else{
+      this.sortoption=event.target.value
+      alert(this.sortoption)
+    }
 
+  }
 
 
 search1(inbox:any){
-  
+
 if(this.userservice.currfolder=='')
 alert('you have to select a folder')
 else {
-  this.service.search(inbox,this.search,this.userservice.currentuser,this.userservice.currfolder).subscribe((res:Mail[])=>{
-    alert(res);
-    console.log(res);
+  // currentuser:any,currentfolder:any,type:any,name:any
+  alert(this.searchoption)
+  this.service.search(this.userservice.currentuser,this.userservice.currfolder,this.searchoption,inbox).subscribe((res:Mail[])=>{
     this.show(res);
   })
 }
@@ -71,7 +85,6 @@ else if(this.option=="Sort"){
 }
 
 
-checkes:boolean[]=[]
 
 getValuesChecked()
 {
@@ -79,10 +92,22 @@ getValuesChecked()
   .map(x=>x.from).join(",")
   console.log(this.checkes) 
 }
+sort(){
 
-
-
-
+if(this.sortoption!=''){
+  alert(this.sortoption);
+  if(this.userservice.currfolder=='')
+  alert('you have to select a folder')
+  else {
+    this.service.sort(this.userservice.currentuser,this.userservice.currfolder,this.sortoption).subscribe((res:Mail[])=>{
+      
+      this.show(res);
+      console.log(res);
+      alert(res)
+    })
+  }
+}
+  }
 
 
 }

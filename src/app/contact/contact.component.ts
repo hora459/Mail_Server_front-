@@ -47,8 +47,6 @@ this.service.loadcontact(this.userservice.currentuser).subscribe((res:any)=>{
     const contactss: myMap = res;
     console.log(contactss)
     for (const key in contactss) {
-      alert(key)
-      alert(contactss[key])
       this.array1.push(key)
     this.array2.push(contactss[key]);
     }
@@ -103,21 +101,7 @@ opena(content: any) {
     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
   });
 }
-openr(content: any) {
-  if(this.userservice.currfolder==""){
-    alert("No Folder is selected!");
-  }
-  else if(this.userservice.currfolder=="All-mails"||this.userservice.currfolder=="Inbox"||this.userservice.currfolder=="Drafts"||this.userservice.currfolder=="Sent"||this.userservice.currfolder=="Trash"){
-    alert("You Cannot Change Name of this Folder");
-  }
-  else{
-  this.modalservice.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    this.closeResult =  `Closed with:${result}`;
-  }, (reason) => {
-    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  });
-}
-}
+
 Selectaccount(fname:string){
 this.userservice.currentaccount=fname
 }

@@ -41,7 +41,7 @@ export class ApiserveService {
    show(filename:string,email:string): Observable<any>{
     return this.http.get("http://localhost:8080/"+"load/"+email+"/"+filename);
   }
-  search(name:any,type:any,currentuser:any,currentfolder:any):Observable<any>{
+  search(currentuser:any,currentfolder:any,type:any,name:any):Observable<any>{
     return this.http.get("http://localhost:8080/"+"filter/"+currentuser+"/"+currentfolder+"/"+type+"/"+name);
   }
   deletemail(mail:Mail,email:string,filename:string){
@@ -55,7 +55,7 @@ export class ApiserveService {
     return this.http.get("http://localhost:8080/"+"addfolder/"+email+"/"+filename,{responseType:'text'});
   }
   renamefile(email:string,filename1:string,filename2:string){
-    return this.http.get("http://localhost:8080/"+"renamefile/"+email+"/"+filename1+"/"+filename2,{responseType:'text'});
+    return this.http.get("http://localhost:8080/"+"renamefolder/"+email+"/"+filename1+"/"+filename2,{responseType:'text'});
   }
   addcontact(email:string,name:string,email1:string[]){
     return this.http.post("http://localhost:8080/"+"addcontact/"+email+"/"+name,email1);
@@ -73,5 +73,8 @@ export class ApiserveService {
   }
   SendToDraft(email:string,mail:string): Observable<any> {
     return this.http.post("http://localhost:8080/"+"addcontact/"+email,mail);
+  }
+  reload(email:string): Observable<any> {
+    return this.http.get("http://localhost:8080/"+"filesreload/"+email);
   }
 }

@@ -15,7 +15,10 @@ constructor(private service:ApiserveService,private http:HttpClient,private rout
   ngOnInit(): void {
   }
   sign_in(mail:any,pass:any){
-    
+    if(mail.length==0||pass.length==0){
+      alert('enter email and password');
+    }
+    else{
     if(this.checkEmail(mail)==false){
     alert('email cannot can only contain letters ,numbers,_+@mail.com')
     }
@@ -33,7 +36,7 @@ constructor(private service:ApiserveService,private http:HttpClient,private rout
 
     }
   }
- 
+}
   checkEmail(mail2:any){
     for (let i = 0; i < mail2.length; i++) {
       if(!this.charIsLetter(mail2[i])&&!this.charIsNumber(mail2[i])&&mail2[i]!='@'&&mail2[i]!='.'&&mail2[i]!='_'){

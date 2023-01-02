@@ -1,5 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { Mail } from './mail';
+import { ApiserveService } from './service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,5 +15,9 @@ export class CurrentuseService {
   currentaccount:string=''
   currentmails:Mail[]=[]
   currfolder:string="";
-  constructor() { }
+  
+  constructor(private modalservice:NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router) { }
+  reload(){
+    this.service.reload(this.currentuser)
+  }
 }

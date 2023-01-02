@@ -22,15 +22,17 @@
             </div>
             <div id="dropdownopt" class="dropdown" style="display:none;">
                 <label style="font-size: 15px; font-weight: bold;margin-right: 5px;"> Sort/Search by </label>
-                <select name="Options" id="Options">
+                <select name="Options" id="Options" (change)="selectsearchorsortoption($event)">
                 <option value=""></option>
                 <option value="from" >From</option>
                 <option value="subject">Subject</option>
                 <option value="body">Body</option>
-                <option value="attachment">Attachment</option>
                 <option value="priority">Priority</option>
-                <option value="Subject">Date</option>
+                <option value="date">Date</option>
             </select>
+            <button  (click)="sort()" style="width:12vh;height:30px;border-radius: 15px; margin: 5px 5px;">apply</button>
+
+          
             </div>
             <div id="search" style="display: none;">
                 <div  style="display: flex;">

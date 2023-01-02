@@ -7,6 +7,7 @@ import { CurrentuseService } from '../currentuse.service';
 import {Ifolder} from '../Ifolder';
 import { HomepageComponent } from '../homepage/homepage.component';
 import { Mail } from '../mail';
+import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -14,21 +15,56 @@ import { Mail } from '../mail';
 })
 export class SidebarComponent implements OnInit {
 
-  folders!: Ifolder[];
+  folders: Ifolder[]=[{name:"inbox",mailIds:0}];
+  folder:Ifolder={name:'',mailIds:0};
   newFolderName:String="";
   closeResult: string | undefined;
-  emailsoffolders:Mail[]=[{"date":"2022-02-01T01:56:09.980Z","attachment":["ahmed.jpg","fathy.pdf"],"subject":"wael","from":"ahmed@mail.com","to":"mado@mail.com","priority":111,"body":"yousefjhhhhhhhhhhhhhhhhhhhhh"},{"date":"2023-01-02T20:56:08.980Z","attachment":["yousef.png","jo.io"],"subject":"hamo","from":"ahmed@mail.com","to":"mado@mail.com","priority":29,"body":"yousef"},{"date":"2023-01-01T23:56:08.980Z","attachment":["jo.io"],"subject":"fathy","from":"ahmed@mail.com","to":"mado@mail.com","priority":6,"body":"yousef"},{"date":"2023-01-01T08:56:23.154Z","attachment":["ahmed.jpg"],"subject":"karim","from":"ahmed@mail.com","to":"mado@mail.com","priority":3,"body":"zainy"}]
   constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService,private homepage:HomepageComponent) { 
-    this.folders= [{"name":"Inbox" ,"mailIds":[0,1,8]},
-    {"name": "Sent" ,"mailIds":[3,4] },
-    {"name": "Drafts" ,"mailIds":[4,6] },
-    {"name": "Trash" ,"mailIds":[7] }
-  ];
+    this.folders=[{name:"inbox",mailIds:0},{name:"sent",mailIds:0},{name:"draft",mailIds:0},{name:"trash",mailIds:0}]
+
+    this.reload();
   }
   ngOnInit(): void {
   
   }
+reload(){
+  this.service.reload(this.userservice.currentuser).subscribe((res:any)=>{
+    console.log(res);
+    type myMap = Record<number, any>;
+    const map: myMap = res;
+    this.folders=[{name:"inbox",mailIds:0},{name:"sent",mailIds:0},{name:"draft",mailIds:0},{name:"trash",mailIds:0}]
+   
+    for (const key in map) {
+      if(key=='trash.json'){
+    var index= 3;
 
+        this.folders[index].mailIds=map[key]
+      }
+      else if(key=='inbox.json'){
+        var index= 0
+            this.folders[index].mailIds=map[key]
+      }
+      else if(key=='sent.json'){
+        var index= 1;    
+    
+        this.folder=this.folders[index]
+        console.log(this.folders)
+            this.folders[index].mailIds=map[key]
+      }
+      else if(key=='draft.json'){
+        var index= 2
+            this.folders[index].mailIds=map[key]
+      }
+      else if(key=='contacts.json'){
+
+      }
+
+      else{
+        this.folder={name:key,mailIds:map[key]}
+  this.folders.push(this.folder)
+    }}
+  })
+}
   addfile(filename:string){
     if(this.folders.length==8){
       alert('you can not make any more folders')
@@ -67,13 +103,11 @@ export class SidebarComponent implements OnInit {
 
   
 Selectfolder(fname:string){
-  //   this.service.show(fname,this.userservice.currentuser).subscribe((res:Mail[])=>{
-  //     this.userservice.currentmails=res;
-  //     this.userservice.currfolder=fname;
-  // this.homepage.show(this.userservice.currentmails);
-  //   });
-    this.userservice.currentmails=this.emailsoffolders;
-    this.homepage.show(this.userservice.currentmails);
+    this.service.show(fname,this.userservice.currentuser).subscribe((res:Mail[])=>{
+      this.userservice.currentmails=res;
+      this.userservice.currfolder=fname;
+  this.homepage.show(this.userservice.currentmails);
+    });
 
 }
   
@@ -82,7 +116,7 @@ Deletefolder(){
   if(this.userservice.currfolder==""){
     alert("No Folder is selected!");
   }
-  else if(this.userservice.currfolder=="Inbox"||this.userservice.currfolder=="Drafts"||this.userservice.currfolder=="Sent"||this.userservice.currfolder=="Trash"){
+  else if(this.userservice.currfolder=="inbox"||this.userservice.currfolder=="drafts"||this.userservice.currfolder=="sent"||this.userservice.currfolder=="trash"){
     alert("The Selected Folder Cannot Be Deleted");
   }
   else{
@@ -97,12 +131,16 @@ Deletefolder(){
   }
 }
 Renamefolder(fname:string){
-  console.log(this.userservice.currfolder);
+  // email:string,filename1:string,filename2:string
+  this.service.renamefile(this.userservice.currentuser,this.userservice.currfolder,fname).subscribe(res=>{
+    console.log(this.userservice.currfolder);
     const indexOfObject = this.folders.findIndex((object) => {
       return object.name === this.userservice.currfolder;
     });
     this.folders[indexOfObject].name=fname;
     this.userservice.currfolder="";
+  })
+
   
 }
 
@@ -117,7 +155,7 @@ openr(content: any) {
   if(this.userservice.currfolder==""){
     alert("No Folder is selected!");
   }
-  else if(this.userservice.currfolder=="All-mails"||this.userservice.currfolder=="Inbox"||this.userservice.currfolder=="Drafts"||this.userservice.currfolder=="Sent"||this.userservice.currfolder=="Trash"){
+  else if(this.userservice.currfolder=="inbox"||this.userservice.currfolder=="draft"||this.userservice.currfolder=="sent"||this.userservice.currfolder=="trash"){
     alert("You Cannot Change Name of this Folder");
   }
   else{

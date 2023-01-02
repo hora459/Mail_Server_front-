@@ -17,7 +17,6 @@ export class SidebarComponent implements OnInit {
   folders!: Ifolder[];
   newFolderName:String="";
   closeResult: string | undefined;
-  emailsoffolders:Mail[]=[{"date":"2022-02-01T01:56:09.980Z","attachment":["ahmed.jpg","fathy.pdf"],"subject":"wael","from":"ahmed@mail.com","to":"mado@mail.com","priority":111,"body":"yousefjhhhhhhhhhhhhhhhhhhhhh"},{"date":"2023-01-02T20:56:08.980Z","attachment":["yousef.png","jo.io"],"subject":"hamo","from":"ahmed@mail.com","to":"mado@mail.com","priority":29,"body":"yousef"},{"date":"2023-01-01T23:56:08.980Z","attachment":["jo.io"],"subject":"fathy","from":"ahmed@mail.com","to":"mado@mail.com","priority":6,"body":"yousef"},{"date":"2023-01-01T08:56:23.154Z","attachment":["ahmed.jpg"],"subject":"karim","from":"ahmed@mail.com","to":"mado@mail.com","priority":3,"body":"zainy"}]
   constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService,private homepage:HomepageComponent) { 
     this.folders= [{"name":"Inbox" ,"mailIds":[0,1,8]},
     {"name": "Sent" ,"mailIds":[3,4] },
@@ -67,14 +66,12 @@ export class SidebarComponent implements OnInit {
 
   
 Selectfolder(fname:string){
-  //   this.service.show(fname,this.userservice.currentuser).subscribe((res:Mail[])=>{
-  //     this.userservice.currentmails=res;
-  //     this.userservice.currfolder=fname;
-  // this.homepage.show(this.userservice.currentmails);
-  //   });
-    this.userservice.currentmails=this.emailsoffolders;
-    this.homepage.show(this.userservice.currentmails);
-
+    this.service.show(fname,this.userservice.currentuser).subscribe((res:Mail[])=>{
+      this.userservice.currentmails=res;
+      this.userservice.currfolder=fname;
+  this.homepage.show(this.userservice.currentmails);
+    });
+  
 }
   
 Deletefolder(){

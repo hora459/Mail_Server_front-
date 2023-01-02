@@ -135,4 +135,6 @@ tbody tr {
 }
 tbody tr:hover {
 background-color:sandybrown ;
+cursor: pointer;
+transform: translateY(-4px);
 }

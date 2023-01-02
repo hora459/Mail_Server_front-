@@ -11,7 +11,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import {ComposeComponent} from './compose/compose.component';
 import { ContactComponent } from './contact/contact.component';
-import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +19,6 @@ import { MatIconModule } from '@angular/material/icon';
    HomepageComponent,
    SidebarComponent,
    ContactComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -28,7 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
     NgbModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatIconModule
+    CommonModule
   ],
   providers: [HttpClient,HomepageComponent],
   bootstrap: [AppComponent]

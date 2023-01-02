@@ -9,7 +9,8 @@ import { CurrentuseService } from '../currentuse.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { from } from 'rxjs';
 import { result } from '../Result';
-import { MatIconModule } from '@angular/material/icon';
+import { Queue } from '../Queue';
+
 @Component({
   selector: 'app-compose',
   templateUrl: './compose.component.html',
@@ -20,6 +21,7 @@ export class ComposeComponent implements OnInit {
   constructor(private service: ApiserveService, private http: HttpClient, private router: Router, private userservice: CurrentuseService, public sanitizer: DomSanitizer) { }
   ngOnInit(): void {
   }
+  queue=new Queue();
   to!:string
   subject!:string
   body!:string
@@ -29,6 +31,7 @@ export class ComposeComponent implements OnInit {
   attachedFileName: String[] = []
   attachedFileUrl: any[] = []
   formData = new FormData();
+  
   c = 0
   x1: any
   x2: any
@@ -37,14 +40,12 @@ export class ComposeComponent implements OnInit {
   mail: any
   buildmail = new MailBuilder()
   select(event: any) {
-    for(var i=0; i<event.target.files.length;i++){
-    this.attachedFile.push(<File>event.target.files[i])
-    this.attachedFileName.push(event.target.files[i].name)
-    this.x1 = URL.createObjectURL(<File>event.target.files[i])
+    this.attachedFile.push(<File>event.target.files[0])
+    this.attachedFileName.push(event.target.files[0].name)
+    this.x1 = URL.createObjectURL(<File>event.target.files[0])
     this.c++;
     this.x1 = <string>this.sanitizer.bypassSecurityTrustUrl(this.x1)
     this.attachedFileUrl.push(this.x1)
-    }
     console.log(this.attachedFileUrl)
     console.log(this.attachedFile)
     console.log(this.attachedFileName)
@@ -61,6 +62,9 @@ export class ComposeComponent implements OnInit {
   
 
   send() {
+    if(this.to.length==0||this.subject.length==0||this.body.length==0||this.priority>5||this.priority<=0){
+      alert('check that all inputs are filled and priority between 1 and 5');
+    }else{
     console.log(this.attachedFileName)
     this.formData=new FormData()
     for (const w of this.attachedFile) {
@@ -70,12 +74,13 @@ export class ComposeComponent implements OnInit {
 
     var str_array = this.to.split(',');
 
-for(var i = 0; i < str_array.length; i++) {
+for(var i = 0; i < str_array.length; i++) {this.queue.enqueue(str_array[i])}
    // Trim the excess whitespace.
-   console.log(str_array.length)
-   alert(str_array[i])
+   console.log(this.queue);
+   while(this.queue.size()!=0){
+
    // Add additional code here, such as:
-   this.mail = this.buildmail.build_mail(this.currentuser, str_array[i], this.subject, this.body, this.priority, this.attachedFileName,Date.now())
+   this.mail = this.buildmail.build_mail(this.currentuser, this.queue.dequeue(), this.subject, this.body, this.priority, this.attachedFileName,Date.now())
    console.log(this.mail)
 
      this.service.send_mail(this.mail).subscribe(res => {
@@ -87,13 +92,13 @@ for(var i = 0; i < str_array.length; i++) {
       })
       if(!this.facederror){
       if(this.attachedFileName.length!=0){
-        alert(this.mail.to)
-        alert(i)
       this.service.send(this.formData,this.mail.to, this.currentuser).subscribe(res => {
         console.log(res)
+        
     })}
+    this.router.navigate(['/homepage'])
   }
-}
+   }}
   
   }
 

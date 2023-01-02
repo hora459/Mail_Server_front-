@@ -5,12 +5,15 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { ContactComponent } from './contact/contact.component';
 const routes: Routes = [
   {path:'compose',component:ComposeComponent},
    {path:'SignIn',component:SignInComponent},
    {path:'signup',component:SignupComponent},
    {path:'homepage',component:HomepageComponent},
-   {path:'sidebar',component:SidebarComponent}
+   {path:'sidebar',component:SidebarComponent},
+   {path:'Contacts',component:ContactComponent}
+
 ];
 
 @NgModule({
@@ -18,4 +21,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents=[SignInComponent,ComposeComponent,SignupComponent,HomepageComponent,SidebarComponent];
+export const routingComponents=[SignInComponent,ComposeComponent,SignupComponent,HomepageComponent,SidebarComponent,ContactComponent];

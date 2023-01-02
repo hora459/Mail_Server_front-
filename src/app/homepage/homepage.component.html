@@ -1,5 +1,59 @@
-<div class="main">
-    <app-sidebar></app-sidebar>
-    <div class="section two">Section 2</div>
+<div style="display: flex; flex-direction: column; background-image:url('./assets/img/back.webp')">
+    <div class="top">
+        <img src="./assets/img/mail.jpg">
+        <a routerLink="/homepage" id="header">YAA<span style="color:rgb(250, 97, 41); ">M</span>ail</a>
+        <div class="sidebuttons">
+            <a routerLink="/Contacts"><img alt ="Contacts" src="./assets/img/contacts-77.png"><span class="tooltiptext">Contacts</span>
+            </a>
+            <a routerLink="/SignIn"><img style="margin-left: 8px;" alt ="Logout" src="./assets/img/logout.png"><span class="tooltiptext">Logout</span>
+            </a>
+        </div>
     </div>
-    
+    <div class="main">
+        <app-sidebar></app-sidebar>
+        <div class="sectiontwo">
+            <div style="display: flex; margin-bottom: 10px;">
+            <div class="dropdown">
+            <select (change)="selectoption($event)">
+            <option value="Options">Select option...</option>
+            <option value="Sort">Sort</option>
+            <option value="Search">Search</option>
+            </select>
+            </div>
+            <div id="dropdownopt" class="dropdown" style="display:none;">
+                <label style="font-size: 15px; font-weight: bold;margin-right: 5px;"> Sort/Search by </label>
+                <select name="Options" id="Options">
+                <option value=""></option>
+                <option value="from" >From</option>
+                <option value="subject">Subject</option>
+                <option value="body">Body</option>
+                <option value="attachment">Attachment</option>
+                <option value="priority">Priority</option>
+                <option value="Subject">Date</option>
+            </select>
+            </div>
+            <div id="search" style="display: none;">
+                <div  style="display: flex;">
+                <input type="text" placeholder="Search" #searchbox style="width:20vh;height:30px;margin:5px 10px;">
+                <button  (click)="search1(searchbox.value)" style="width:12vh;height:30px;border-radius: 15px; margin: 5px 5px;">Search</button>
+                </div>
+                </div>
+            </div>
+            <table class="table table-responsive table-striped table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 100px">Sender</th>
+                    <th style="width: 100px">Subject</th>
+                    <th style="width: 100px">Date</th>
+                </tr>
+            </thead>
+                <tbody *ngFor = "let email of currentemails; let i=index">
+                <tr>
+                    <td><input type="checkbox" [(ngModel)]="checkes[i]" (ngModelChange)="getValuesChecked()" style="margin-right: 3px;">{{email.from}}</td>
+                    <td>{{email.subject}}</td>
+                    <td>{{email.date}}</td>
+                </tr>
+            </tbody>
+            </table>
+</div>
+

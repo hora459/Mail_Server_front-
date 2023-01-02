@@ -1,50 +1,39 @@
 <div class="section one">
-    <div class="top">
-      <img src="./assets/img/mail.jpg">
-      <a id="header">YAA<span style="color: darkorange; ">M</span>ail</a>
-      </div>
       <!-- <button class="sidebutton"><img src="./assets/img/compose.png">Compose</button> -->
-      <div class="sidebuttons">
-        <a routerLink="/compose" style="width:60% ;margin-left: 60px; justify-content: center;"><img alt ="Compose" src="./assets/img/compose2.png">
-          <p>Compose </p>
-        </a>
-      </div>
-      <div style="display:flex; justify-content: center;">
-      <div class="sidebuttons">
-        <a><img alt ="Reload" src="./assets/img/refresh-512.webp">
-          <p>Reload </p>
-        </a>
-      </div>
-      <div class="sidebuttons">
-        <a routerLink="/compose"><img alt ="Contacts" src="./assets/img/contacts-77.png">
-          <p>Contacts</p>
-        </a>
+      <div style="display: flex;">
+        <div class="sidebuttons">
+          <a routerLink="/compose" style="justify-content: center;width:200px;"><img alt ="Compose" src="./assets/img/compose2.png">
+           <p>Compose </p>
+          </a>
+        </div>
+        <div class="sidebuttons">
+          <a style="width: 60px; border-radius: 80px;"><img style="margin-left: 9px;" alt ="Reload" src="./assets/img/refresh-512.webp">
+            <span class="tooltiptext">Refresh</span></a>
         </div>
       </div>
-   
   
       <div class="nav-list" id="nav-list" *ngFor = "let folder of folders" > 
-        <a  (click)="Selectfolder(folder.name)" routerLink="/folder/{{folder.name}}" routerLinkActive="active current"><img alt ="add" src="./assets/img/inbox.png"><span class="Name">{{folder.name}}</span><span class="count">{{folder.mailIds.length}}</span></a>
+        <a  (click)="Selectfolder(folder.name)" routerLink="/homepage" routerLinkActive="active current"><img alt ="add" src="./assets/img/inbox.png"><span class="Name">{{folder.name}}</span><span class="count">{{folder.mailIds.length}}</span></a>
       </div>
     <div  style="display: flex; ">
     <div class="FOLDER">
       <div class="sidebuttons">
         <a (click)="opena(add)"><img alt ="add" src="./assets/img/add.webp">
-                <p>Add Folder</p>
+          <span class="tooltiptext">Add Folder</span>
         </a>
       </div>
     </div>
     <div class="FOLDER">
       <div class="sidebuttons">
         <a (click)="openr(rename)"><img alt ="Rename" src="./assets/img/rename.png">
-            <p>Rename Folder</p>
+          <span class="tooltiptext">Rename Folder</span>
         </a>
       </div>
     </div>
     <div class="FOLDER">
       <div class="sidebuttons">
         <a (click)="Deletefolder()"><img alt ="Delete" src="./assets/img/delete.png">
-            <p>Delete Folder</p>
+          <span class="tooltiptext">Delete Folder</span>
         </a>
       </div>
     </div>

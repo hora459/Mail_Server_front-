@@ -1,0 +1,50 @@
+<button (click)="opena(add)">addcontact</button>
+<ng-template #add let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add New contact</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+        <div class="form-group">
+          <label for="FileName">Enter Contact Name</label>
+            <input id="firstname" class="form-control" #contactname>
+            <label for="FileName">Enter email</label>
+            <input id="firstname" class="form-control" #emails>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark"  (click)="modal.close('Save click');addcontact(contactname.value,emails.value)" >Add</button>
+    </div>
+  </ng-template>
+<button (click)="deletecontact()" >delete contact</button>
+<button >edit</button>
+<button (click)="loadcontacts()">reload</button>
+
+  <ng-template #rename let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Rename Folder</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+          <label for="FileName">Enter Folder's New Name</label>
+            <input id="firstname" class="form-control" (keydown.enter)="modal.close('Save click')" #filename>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark"  (click)="modal.close('Save click')">Rename</button>
+    </div>
+  </ng-template>
+
+
+  <div class="nav-list" id="nav-list" *ngFor = "let folder of array1; let i = index" > 
+    <label  (click)="Selectaccount(folder)" ><img alt ="add" src="./assets/img/inbox.png"><span class="Name">{{folder}}</span></label>
+    <div  *ngFor = "let contact2 of array2[i]">
+      <label  style="margin-right: 4px;">{{contact2+' '}}</label>
+    </div>
+  </div>

@@ -9,22 +9,28 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
+import {ComposeComponent} from './compose/compose.component';
+import { ContactComponent } from './contact/contact.component';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
    routingComponents,
    HomepageComponent,
    SidebarComponent,
+   ContactComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    MatIconModule
   ],
-  providers: [HttpClient],
+  providers: [HttpClient,HomepageComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

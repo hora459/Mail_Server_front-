@@ -5,6 +5,8 @@ import { ApiserveService } from '../service';
 import { Router } from '@angular/router';
 import { CurrentuseService } from '../currentuse.service';
 import {Ifolder} from '../Ifolder';
+import { HomepageComponent } from '../homepage/homepage.component';
+import { Mail } from '../mail';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -13,46 +15,25 @@ import {Ifolder} from '../Ifolder';
 export class SidebarComponent implements OnInit {
 
   folders!: Ifolder[];
-  currentmails!:any[];
   newFolderName:String="";
   closeResult: string | undefined;
-  currfolder:string="";
-  constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService) { 
+  emailsoffolders:Mail[]=[{"date":"2022-02-01T01:56:09.980Z","attachment":["ahmed.jpg","fathy.pdf"],"subject":"wael","from":"ahmed@mail.com","to":"mado@mail.com","priority":111,"body":"yousefjhhhhhhhhhhhhhhhhhhhhh"},{"date":"2023-01-02T20:56:08.980Z","attachment":["yousef.png","jo.io"],"subject":"hamo","from":"ahmed@mail.com","to":"mado@mail.com","priority":29,"body":"yousef"},{"date":"2023-01-01T23:56:08.980Z","attachment":["jo.io"],"subject":"fathy","from":"ahmed@mail.com","to":"mado@mail.com","priority":6,"body":"yousef"},{"date":"2023-01-01T08:56:23.154Z","attachment":["ahmed.jpg"],"subject":"karim","from":"ahmed@mail.com","to":"mado@mail.com","priority":3,"body":"zainy"}]
+  constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService,private homepage:HomepageComponent) { 
     this.folders= [{"name":"Inbox" ,"mailIds":[0,1,8]},
     {"name": "Sent" ,"mailIds":[3,4] },
     {"name": "Drafts" ,"mailIds":[4,6] },
-    {"name": "Trash" ,"mailIds":[7] },
-    {"name": "All-mails" ,"mailIds":[0,1,2,3,4,5,6,7,8]
-  }];
+    {"name": "Trash" ,"mailIds":[7] }
+  ];
   }
   ngOnInit(): void {
   
   }
-  showA(){
-    if (document.getElementById("addn")!.style.display=="block"){
-      document.getElementById("addn")!.style.display="none";
-      document.getElementById("addin")!.style.display="none";
-    }
-    else{
-      document.getElementById("addn")!.style.display="block";
-      document.getElementById("addin")!.style.display="block";
-  
-    }
-  }
-  showB(){
-    if (document.getElementById("rename")!.style.display=="block"){
-      document.getElementById("rename")!.style.display="none";
-      document.getElementById("renamein")!.style.display="none";
-    }
-    else{
-      document.getElementById("rename")!.style.display="block";
-      document.getElementById("renamein")!.style.display="block";
-  
-    }
-  }
 
   addfile(filename:string){
-
+    if(this.folders.length==8){
+      alert('you can not make any more folders')
+    }
+    else{
     var flag=true;
 
 
@@ -76,46 +57,52 @@ export class SidebarComponent implements OnInit {
       }
       else{
         this.folders.push({"name":filename ,"mailIds":[]})
-    this.service.addfile(filename,this.userservice.currentuser).subscribe(res=>{
+    this.service.addfile(this.userservice.currentuser,filename).subscribe(res=>{
       console.log(res);
     });
   }
   }
-
+  }
   }
 
   
 Selectfolder(fname:string){
-    this.service.show(fname,this.userservice.currentuser).subscribe(res=>{
-      this.currentmails=res;
-    });
-    this.currfolder=fname;
+  //   this.service.show(fname,this.userservice.currentuser).subscribe((res:Mail[])=>{
+  //     this.userservice.currentmails=res;
+  //     this.userservice.currfolder=fname;
+  // this.homepage.show(this.userservice.currentmails);
+  //   });
+    this.userservice.currentmails=this.emailsoffolders;
+    this.homepage.show(this.userservice.currentmails);
 
-  }
+}
+  
 Deletefolder(){
-  console.log(this.currfolder);
-  if(this.currfolder==""){
+  console.log(this.userservice.currfolder);
+  if(this.userservice.currfolder==""){
     alert("No Folder is selected!");
   }
-  else if(this.currfolder=="All-mails"||this.currfolder=="Inbox"||this.currfolder=="Drafts"||this.currfolder=="Sent"||this.currfolder=="Trash"){
+  else if(this.userservice.currfolder=="Inbox"||this.userservice.currfolder=="Drafts"||this.userservice.currfolder=="Sent"||this.userservice.currfolder=="Trash"){
     alert("The Selected Folder Cannot Be Deleted");
   }
   else{
     const indexOfObject = this.folders.findIndex((object) => {
-      return object.name === this.currfolder;
+      return object.name === this.userservice.currfolder;
     });
+    this.service.deletefolder(this.userservice.currentuser,this.userservice.currfolder)
     this.folders.splice(indexOfObject,1);
-    this.currfolder="";
+    this.userservice.currfolder="";
     alert("Folder Deleted Successfully");
+    
   }
 }
 Renamefolder(fname:string){
-  console.log(this.currfolder);
+  console.log(this.userservice.currfolder);
     const indexOfObject = this.folders.findIndex((object) => {
-      return object.name === this.currfolder;
+      return object.name === this.userservice.currfolder;
     });
     this.folders[indexOfObject].name=fname;
-    this.currfolder="";
+    this.userservice.currfolder="";
   
 }
 
@@ -127,10 +114,10 @@ opena(content: any) {
   });
 }
 openr(content: any) {
-  if(this.currfolder==""){
+  if(this.userservice.currfolder==""){
     alert("No Folder is selected!");
   }
-  else if(this.currfolder=="All-mails"||this.currfolder=="Inbox"||this.currfolder=="Drafts"||this.currfolder=="Sent"||this.currfolder=="Trash"){
+  else if(this.userservice.currfolder=="All-mails"||this.userservice.currfolder=="Inbox"||this.userservice.currfolder=="Drafts"||this.userservice.currfolder=="Sent"||this.userservice.currfolder=="Trash"){
     alert("You Cannot Change Name of this Folder");
   }
   else{
@@ -141,8 +128,7 @@ openr(content: any) {
   });
 }
 }
-
-  private getDismissReason(reason: any): string {
+private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {

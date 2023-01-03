@@ -47,8 +47,8 @@ export class ApiserveService {
   deletemail(mail:Mail[],email:string,filename:string){
     return this.http.request('delete', `${environment.api_url}deletemail/${email}/${filename}`, {body: mail})
   }
-  deletefolder(mail:Mail,email:string,filename:string){
-     return this.http.request('delete',  `${environment.api_url}delete/${email}/${filename}`,{body:mail})
+  deletefolder(email:string,filename:string){
+     return this.http.request('delete',  `${environment.api_url}deletefolder/${email}/${filename}`,{body:null})
   }
 
   addfile(email:string,filename:string){
@@ -79,5 +79,8 @@ export class ApiserveService {
   }
   movemails(mails:Mail[],currentemail:any,currentfile:any,destination:any): Observable<any>{
     return this.http.post("http://localhost:8080/"+"moveemail/"+currentemail+"/"+currentfile+"/"+destination,mails);
+  }
+  searchcontacts(currentuser:any,name:any){
+    return this.http.get("http://localhost:8080/"+"filtercontact/"+currentuser+"/"+name);
   }
 }

@@ -74,29 +74,39 @@ else {
   this.currentemails=array
   console.log(this.currentemails)
   this.checkes=[]
+  if(this.currentemails!=null){
   for(var i=0;i<this.currentemails.length;i++){
     this.checkes[i]=false;
+  }}
   }
-  }
-
+selectasc(event:any){
+alert(event.target.value);
+}
 selectoption(event:any){
-this.option= event.target.value;
-console.log(this.option);
-
-if(this.option=="Search"){
-  document.getElementById("dropdownopt")!.style.display="block";
-  document.getElementById("search")!.style.display="block";
-}
-else if(this.option=="Sort"){
-  document.getElementById("dropdownopt")!.style.display="block";
-  document.getElementById("search")!.style.display="none";
-}else{
-  document.getElementById("dropdownopt")!.style.display="none";
-  document.getElementById("search")!.style.display="none";
-}
-
-}
-
+  this.option= event.target.value;
+  console.log(this.option);
+  
+  if(this.option=="Search"){
+    document.getElementById("dropdownoptsearch")!.style.display="block";
+    document.getElementById("dropdownoptsort")!.style.display="none";
+    document.getElementById("search")!.style.display="block";
+    document.getElementById("dropdownsort")!.style.display="none";
+  }
+  else if(this.option=="Sort"){
+    document.getElementById("dropdownoptsearch")!.style.display="none";
+    document.getElementById("dropdownoptsort")!.style.display="block";
+    document.getElementById("search")!.style.display="none";
+    document.getElementById("dropdownsort")!.style.display="block";
+  
+  }else{
+    document.getElementById("dropdownoptsearch")!.style.display="none";
+    document.getElementById("dropdownoptsort")!.style.display="none";
+    document.getElementById("search")!.style.display="none";
+    document.getElementById("dropdownsort")!.style.display="none";
+  
+  }
+  
+  }
 
 
 getValuesChecked()
@@ -170,5 +180,12 @@ opena(content: any) {
   }, (reason) => {
     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
   });
+}
+restore(){
+  if(this.userservice.currfolder!='trash'){
+  alert('you can only restore from trash')
+  }
+  else{
+this.bulkmove('restored')}
 }
 }

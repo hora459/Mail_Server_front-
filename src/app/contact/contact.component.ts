@@ -16,13 +16,13 @@ import { map } from 'rxjs';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
- array1:string[]=[''];
- array2:string[][]=[['']];
+ array1:string[]=[];
+ array2:string[][]=[[]];
 
-//    contacts: Map<string, string[]> = new Map([
-//  ['',['']]
-//   ]);
-contacts: Map<string, string[]> =new Map()
+   contacts: Map<string, string[]> = new Map([
+ ['',['']]
+  ]);
+
   
   constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService,private homepage:HomepageComponent) {
   
@@ -31,10 +31,22 @@ contacts: Map<string, string[]> =new Map()
   ngOnInit(): void {
     this.loadcontacts();
   }
-
+  selectoption:number=-1
+  ele:any
+  displayRadioValue() {
+   this.ele = document.getElementsByName('selected');
+      
+    for(var i = 0; i < this.ele.length; i++) {
+        if(this.ele[i].checked)
+        this.selectoption= this.ele[i].value;
+    }
+    if(this.selectoption>-1)
+    this.userservice.currentaccount=this.array1[this.selectoption]
+  }
 addcontact(contactname:any,email:string){
   var emails = email.split(',');
 this.contacts.set(contactname,emails);
+console.log(emails)
 this.service.addcontact(this.userservice.currentuser,contactname,emails).subscribe(res=>{
   console.log(res)
   this.loadcontacts()
@@ -52,9 +64,9 @@ loadcontacts(){
 this.service.loadcontact(this.userservice.currentuser).subscribe((res:any)=>{
   if(res!=null){
     console.log(res)
-    this.array1=[''];
-    this.array2=[['']];
-    type myMap = Record<number, any>;
+    this.array1=[];
+    this.array2=[[]];
+    type myMap = Record<any, any>;
     const contactss: myMap = res;
     console.log(contactss)
     for (const key in contactss) {
@@ -62,24 +74,28 @@ this.service.loadcontact(this.userservice.currentuser).subscribe((res:any)=>{
     this.array2.push(contactss[key]);
     }
   }
-
+console.log(this.array2)
 this.router.navigate(['/Contacts'])
 })
 }
-editcontact(){
+editcontact(filename:any){
+
+ 
 if(this.userservice.currentaccount==''){
   alert('you must choose a contact first')
 }
 else{
-this.service.renamecontact(this.userservice.currentuser,this.userservice.currentaccount,'wael').subscribe(res=>{
+this.service.renamecontact(this.userservice.currentuser,this.userservice.currentaccount,filename).subscribe(res=>{
   console.log(res)
   const indexOfObject = this.array1.indexOf(this.userservice.currentaccount)
   console.log(indexOfObject)
-  const indexOfObject1 = this.array1.indexOf('wael')
+  const indexOfObject1 = this.array1.indexOf(filename)
   console.log(indexOfObject1)
+  alert('hena')
 if(indexOfObject1==-1){
   console.log(this.array2)
-  this.addcontact2('wael',this.array2[indexOfObject])
+
+  this.addcontact2(filename,this.array2[indexOfObject])
   this.deletecontact()
   this.userservice.currentaccount=''
 }
@@ -112,6 +128,7 @@ console.log(this.array1)
 console.log(this.array2)
 console.log(this.contacts)
 this.userservice.currentaccount=''
+this.loadcontacts()
 this.router.navigate(['/Contacts'])
   }
 }
@@ -134,7 +151,39 @@ opena(content: any) {
   });
 }
 
+openr(content: any) {
+
+  alert(this.array1[this.selectoption])
+  if(this.userservice.currentaccount==""){
+    alert("No account is selected!");
+  }
+
+  else{
+  this.modalservice.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
+}
 Selectaccount(fname:string){
 this.userservice.currentaccount=fname
+}
+search(name:any){
+this.service.searchcontacts(this.userservice.currentuser,name).subscribe(res=>{
+  if(res!=null){
+    console.log(res)
+    this.array1=[];
+    this.array2=[[]];
+    type myMap = Record<any, any>;
+    const contactss: myMap = res;
+    console.log(contactss)
+    for (const key in contactss) {
+      this.array1.push(key)
+    this.array2.push(contactss[key]);
+    }
+  }
+console.log(this.array2)
+})
 }
 }

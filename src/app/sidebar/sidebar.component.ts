@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
   newFolderName:String="";
   closeResult: string | undefined;
   constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService,private homepage:HomepageComponent) { 
-    this.folders=[{name:"inbox",mailIds:0},{name:"sent",mailIds:0},{name:"draft",mailIds:0},{name:"trash",mailIds:0}]
+    this.folders=[{name:"inbox",mailIds:0},{name:"sent",mailIds:0},{name:"draft",mailIds:0},{name:"trash",mailIds:0},{name:'restored',mailIds:0}]
     this.reload();
   }
   ngOnInit(): void {
@@ -33,7 +33,7 @@ reload(){
     console.log(res);
     type myMap = Record<number, any>;
     const map: myMap = res;
-    this.folders=[{name:"inbox",mailIds:0},{name:"sent",mailIds:0},{name:"draft",mailIds:0},{name:"trash",mailIds:0}]
+    this.folders=[{name:"inbox",mailIds:0},{name:"sent",mailIds:0},{name:"draft",mailIds:0},{name:"trash",mailIds:0},{name:'restored',mailIds:0}]
    
     for (const key in map) {
       if(key=='trash'){
@@ -58,6 +58,9 @@ reload(){
       }
       else if(key=='contacts'){
 
+      }else if(key=='restored'){
+        var index= 4
+            this.folders[index].mailIds=map[key]
       }
 
       else{
@@ -125,7 +128,7 @@ Deletefolder(){
     const indexOfObject = this.folders.findIndex((object) => {
       return object.name === this.userservice.currfolder;
     });
-    this.service.deletefolder(new Mail(),this.userservice.currentuser,this.userservice.currfolder).subscribe(res=>{
+    this.service.deletefolder(this.userservice.currentuser,this.userservice.currfolder).subscribe(res=>{
       console.log(res)
     })
     this.folders.splice(indexOfObject,1);

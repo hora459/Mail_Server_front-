@@ -29,8 +29,7 @@ list:any
 
   ngOnInit(): void {
   }
-  show() {
-    
+  show() {    
     console.log(this.list)
     for (let i = 0; i < this.list.length; i++) {
       this.service.getfile(this.list[i], this.thatmail.from).subscribe(response => {

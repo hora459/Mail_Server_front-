@@ -154,3 +154,47 @@ transform: translateY(-4px);
     margin-right: 3px;
     background-color: darkgray;
 }
+
+  
+.topbuttons{
+    margin-left: 5px;
+
+}  
+.topbuttons img{
+    margin-left: 5px;
+    width:30px;
+    height:30px;
+    margin-right:5px;
+}
+
+.topbuttons a{
+    display: flex;
+    width :50px;
+    flex-flow: row nowrap;
+    text-align: center;
+    border: 2px solid darkgrey;
+    margin: 10px 10px;
+    padding: 0.5rem 0.3rem;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    font-size: 15px;
+    background-color:beige;
+    border-radius: 80px;
+    font-weight: bold;
+    height: 50px;
+    min-width: 56px;
+    align-items: center;
+}
+.topbuttons a:hover{
+    cursor: pointer;
+    background-color:cadetblue
+}
+
+.topbuttons .sidebuttons {
+    margin-left: 0px;
+ 
+}
+.topbuttons .sidebuttons .tooltiptext{
+
+    top: -40%;
+    margin-left: -75px;
+}

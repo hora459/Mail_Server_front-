@@ -12,16 +12,17 @@
     <div class="main">
         <app-sidebar></app-sidebar>
         <div class="sectiontwo">
-            <div style="display: flex; margin-bottom: 10px;">
-            <div class="dropdown">
+            <div style="display: flex;">
+            <div style="display: flex; margin-bottom: 10px; width:105vh;">
+            <div class="dropdown" style="margin-top: 3px;">
             <select (change)="selectoption($event)">
-            <option value="Options">Select option...</option>
+            <option value="">Select Option...</option>
             <option value="Sort">Sort</option>
             <option value="Search">Search</option>
             </select>
             </div>
-            <div id="dropdownopt" class="dropdown" style="display:none;">
-                <label style="font-size: 15px; font-weight: bold;margin-right: 5px;"> Sort/Search by </label>
+            <div id="dropdownoptsort" class="dropdown" style="margin-top:2px; display:none;">
+                <label style="font-size: 15px; font-weight: bold;margin-right: 5px;"> Sort by </label>
                 <select name="Options" id="Options" (change)="selectsearchorsortoption($event)">
                 <option value=""></option>
                 <option value="from" >From</option>
@@ -30,33 +31,94 @@
                 <option value="attachment">Attachment</option>
                 <option value="priority">Priority</option>
                 <option value="Subject">Date</option>
-            </select>
-            <button (click)="sort()">sort</button>
+                </select>
             </div>
+            <div id="dropdownoptsearch" class="dropdown" style="display:none;">
+                <label style="font-size: 15px; font-weight: bold;margin-right: 5px;">Search by </label>
+                <select name="Options" id="Options" (change)="selectsearchorsortoption($event)">
+                <option value=""></option>
+                <option value="from" >From</option>
+                <option value="subject">Subject</option>
+                <option value="body">Body</option>
+                <option value="attachment">Attachment</option>
+                <option value="priority">Priority</option>
+                <option value="date">Date</option>
+                </select>
+            </div>
+            <div id="dropdownsort" class="dropdown" style="display: none; margin-top: 0px;">
+                <label style="font-size: 15px; font-weight: bold;margin-right: 5px;"> Sort Option </label>
+                <select (change)="selectasc($event)">
+                <option></option>
+                <option value="Ascendingly">Ascendingly</option>
+                <option value="Descendingly">Descendingly</option>
+                </select>
+                <button   style="width:12vh;height:30px;border-radius: 15px; margin: 5px 5px;">Apply</button>
+            </div>
+            
             <div id="search" style="display: none;">
                 <div  style="display: flex;">
-                <input type="text" placeholder="Search" #searchbox style="width:20vh;height:30px;margin:5px 10px;">
+                <input type="text" placeholder="Search For" #searchbox style="width:20vh;height:30px;margin:5px 10px;">
                 <button  (click)="search1(searchbox.value)" style="width:12vh;height:30px;border-radius: 15px; margin: 5px 5px;">Search</button>
                 </div>
-                </div>
             </div>
-            <table class="table table-responsive table-striped table-hover">
-            <thead>
-                <tr>
-                    <th style="width: 100px">Sender</th>
-                    <th style="width: 100px">Body</th>
-                    <th style="width: 100px">Date</th>
-                    <th style="width: 100px">Priority</th>
+            </div>
+            <div class="topbuttons" style="display: flex;" >
+                <div class="sidebuttons">
+                    <a (click)="opena(add)"><img alt ="Add" src="./assets/img/that4.png">
+                      <span class="tooltiptext">Move Mail</span>
+                    </a>
+                  </div>
+                  <div class="sidebuttons">
+                    <a (click)="bulkdelete()"><img alt ="Edit" src="./assets/img/delete.png">
+                      <span class="tooltiptext">Delete Mail</span>
+                    </a>
+                </div>
+                <div class="sidebuttons">
+                  <a (click)="restore()"><img alt ="Delete" src="./assets/img/reply.jpg">
+                    <span class="tooltiptext">Restore</span>
+                  </a>
+                </div>
+          </div>
+      </div>
+          <table class="table table-responsive table-striped table-hover">
+          <thead>
+              <tr>
+                  <th style="width: 100px">From</th>
+                  <th style="width: 100px">To</th>
+                  <th style="width: 100px">subject</th>
+                  <th style="width: 100px">Date</th>
+                  <th style="width: 100px">Priority</th>
 
-                </tr>
-            </thead>
-                <tbody *ngFor = "let email of currentemails; let i=index">
-                <tr>
-                    <td  ><input type="checkbox" [(ngModel)]="checkes[i]" (ngModelChange)="getValuesChecked()" style="margin-right: 3px;">{{email.from}}</td>
-                    <td (click)="setmail(email.date)" routerLink="/Mail">{{email.body}}</td>
-                    <td (click)="setmail(email.date)" routerLink="/Mail">{{email.date}}</td>
-                    <td (click)="setmail(email.date)" routerLink="/Mail" class="priority"><img src="./assets/img/yellow.png"> {{email.priority}}</td>
-                </tr>
-            </tbody>
-            </table>
+              </tr>
+          </thead>
+              <tbody *ngFor = "let email of currentemails; let i=index">
+              <tr>
+                  <td> <input type="checkbox" [(ngModel)]="checkes[i]" (ngModelChange)="getValuesChecked()" style="margin-right: 3px;">{{email.from}}</td>
+                  <td (click)="setmail(email.date)" routerLink="/Mail">{{email.to}}</td>
+                  <td (click)="setmail(email.date)" routerLink="/Mail">{{email.subject}}</td>
+                  <td (click)="setmail(email.date)" routerLink="/Mail">{{email.date}}</td>
+                  <td (click)="setmail(email.date)" routerLink="/Mail" class="priority"><img src="./assets/img/yellow.png"> {{email.priority}}</td>
+              </tr>
+          </tbody>
+          </table>
 </div>
+<ng-template #add let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">enter folder name</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+        <div class="form-group">
+          <label for="FileName">Enter folder Name</label>
+            <input id="firstname" class="form-control" #filename>
+      
+        </div>
+      
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark"  (click)="modal.close('Save click');bulkmove(filename.value)" >enter</button>
+    </div>
+  </ng-template>

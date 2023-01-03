@@ -86,7 +86,9 @@ for(var i = 0; i < str_array.length; i++) {
    console.log(str_array.length)
    alert(str_array[i])
    // Add additional code here, such as:
-   this.mail = this.buildmail.build_mail(this.currentuser, str_array[i], this.subject, this.body, this.priority, this.attachedFileName,Date.now())
+   let date = new Date();
+let formattedTime = date.toLocaleTimeString('en-US', {day:"2-digit",year:"numeric",month:"2-digit",hour: '2-digit', minute: '2-digit', second: '2-digit'});
+   this.mail = this.buildmail.build_mail(this.currentuser, str_array[i], this.subject, this.body, this.priority, this.attachedFileName,formattedTime)
    console.log(this.mail)
 
      this.service.send_mail(this.mail).subscribe(res => {
@@ -148,15 +150,16 @@ for(var i = 0; i < str_array.length; i++) {
    // Trim the excess whitespace.
    console.log(str_array.length)
    alert(str_array[i])
+   let date = new Date();
+let formattedTime = date.toLocaleTimeString('en-US', {day:"2-digit",year:"numeric",month:"2-digit",hour: '2-digit', minute: '2-digit', second: '2-digit'});
    // Add additional code here, such as:
-   this.mail = this.buildmail.build_mail(this.currentuser, str_array[i], this.subject, this.body, this.priority, this.attachedFileName,Date.now())
+   this.mail = this.buildmail.build_mail(this.currentuser, str_array[i], this.subject, this.body, this.priority, this.attachedFileName,formattedTime)
    console.log(this.mail)
 
     this.service.SendToDraft(this.userservice.currentuser,this.mail).subscribe(res=>{
       console.log(res)
     })
   }
-
   this.router.navigate(['/homepage'])
   
 }

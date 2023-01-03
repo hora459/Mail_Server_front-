@@ -60,14 +60,25 @@ export class ComposeComponent implements OnInit {
   }
   
 
-  send() {
+  send(to:any,subject:any,body:any,priority:any,attachments:any) {
     console.log(this.attachedFileName)
+    this.attachedFile=attachments
+    this.to=to
+    this.subject=subject
+    this.body=body
+    this.priority=priority
+
+    
+    if(this.to.length==0||this.subject.length==0||this.priority<=0||this.priority>5||this.body.length==0){
+      alert('you have to fill to ,subject,priority and body');
+    }
+    else{
     this.formData=new FormData()
     for (const w of this.attachedFile) {
       this.formData.append('attachment', w);
       console.log(w)
     }
-alert(this.to)
+
     var str_array = this.to.split(',');
 
 for(var i = 0; i < str_array.length; i++) {
@@ -92,9 +103,10 @@ for(var i = 0; i < str_array.length; i++) {
       this.service.send(this.formData,this.mail.to, this.currentuser).subscribe(res => {
         console.log(res)
     })}
-  }
+  }}
+  this.router.navigate(['/homepage'])
 }
-  
+
   }
 
   show() {

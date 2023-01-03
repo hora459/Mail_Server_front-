@@ -13,15 +13,16 @@
             <app-sidebar></app-sidebar>
             <div class="section two">
                 <div class="compose">
-                    <button id="cancel" routerLink="/homepage">X</button>
+                  //  to:any,subject:any,body:any,priority:any,attachments:any
+                    <button id="cancel" (click)="sendtodraft(to.value,text.value,body.value,importance.value)" routerLink="/homepage">X</button>
                     <label for="to">To:</label>
-                    <input type="text" id="to" name="to">
+                    <input type="text" id="to" name="to" #to>
                     <label for="subject">Subject:</label>
-                    <input type="text" id="subject" name="subject">
+                    <input type="text" id="subject" name="subject" #text>
                     <label for="importance">Importance:</label>
-                    <input type="text" id="importance" name="importance">
+                    <input type="text" id="importance" name="importance" #importance>
                     <label for="Body">Message:</label>
-                    <textarea id="message" name="message"></textarea>
+                    <textarea id="message" name="message" #body></textarea>
                     <div style="display:flex;">
                     <div class="att" style="display:flex;width:120vh;">
                         <div class="Attach">
@@ -36,7 +37,7 @@
                         </div>
                     </div>
                     <div style="width: 20vh;">
-                        <button id="send"  (click)="send()">Send</button>
+                        <button id="send"  (click)="send(to.value,text.value,body.value,importance.value,fileInput.files)">Send</button>
                     </div>   
                     </div>
                 </div>

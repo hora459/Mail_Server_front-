@@ -1,30 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <div class="loginbox">
-        
-    
+<div class="main" style="background-image: url('./assets/img/back.webp');">
+    <div class="loginbox">        
     <h1>Sign Up</h1>
-
-    <label>email:</label>
+    <label>Email:</label>
     <br>
     <div class="signupemail">
-    <input type="text"  placeholder="enter your email" #mail>
+    <input type="text"  placeholder="Enter your email" #mail>
     <input  type="text" class="form-control" value="@mail.com" id="yaamail" readonly>
     </div>
-    <label>password:</label>
+    <label>Password:</label>
     <input type="password" placeholder="enter password" #pass>
-    <input type="submit" (click)="signup(mail.value,pass.value)" name="" value="signup">  
-    <label>already have an account? </label>
-    <a routerLink="/SignIn">login</a>
+    <input type="submit" (click)="signup(mail.value,pass.value)" name="" value="Sign Up">  
+    <label style="font-size:17px; margin-left: 5px;">Already have an account? </label>
+    <a style="font-size: 17px; font-weight: bold;" routerLink="/SignIn">Login</a>
     </div>
-    
-</body>
-</html>
+</div>

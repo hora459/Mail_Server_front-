@@ -6,6 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ContactComponent } from './contact/contact.component';
+import { EmailComponent } from './email/email.component';
 const routes: Routes = [
   {path:'compose',component:ComposeComponent},
    {path:'SignIn',component:SignInComponent},
@@ -13,7 +14,7 @@ const routes: Routes = [
    {path:'homepage',component:HomepageComponent},
    {path:'sidebar',component:SidebarComponent},
    {path:'Contacts',component:ContactComponent},
-  
+  {path:'Mail',component:EmailComponent}
 
 ];
 
@@ -22,4 +23,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents=[SignInComponent,ComposeComponent,SignupComponent,HomepageComponent,SidebarComponent,ContactComponent];
+export const routingComponents=[SignInComponent,ComposeComponent,SignupComponent,HomepageComponent,SidebarComponent,ContactComponent,EmailComponent];

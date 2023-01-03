@@ -35,7 +35,18 @@ contacts: Map<string, string[]> =new Map()
 addcontact(contactname:any,email:string){
   var emails = email.split(',');
 this.contacts.set(contactname,emails);
-this.service.addcontact(this.userservice.currentuser,contactname,emails);
+this.service.addcontact(this.userservice.currentuser,contactname,emails).subscribe(res=>{
+  console.log(res)
+  this.loadcontacts()
+});
+}
+addcontact2(contactname:any,emails:string[]){
+this.contacts.set(contactname,emails);
+console.log(emails)
+this.service.addcontact(this.userservice.currentuser,'wael',emails).subscribe(res=>{
+  console.log(res)
+  this.loadcontacts()
+});
 }
 loadcontacts(){
 this.service.loadcontact(this.userservice.currentuser).subscribe((res:any)=>{
@@ -52,11 +63,32 @@ this.service.loadcontact(this.userservice.currentuser).subscribe((res:any)=>{
     }
   }
 
-this.router.navigate(['/contact'])
+this.router.navigate(['/Contacts'])
 })
 }
 editcontact(){
-
+if(this.userservice.currentaccount==''){
+  alert('you must choose a contact first')
+}
+else{
+this.service.renamecontact(this.userservice.currentuser,this.userservice.currentaccount,'wael').subscribe(res=>{
+  console.log(res)
+  const indexOfObject = this.array1.indexOf(this.userservice.currentaccount)
+  console.log(indexOfObject)
+  const indexOfObject1 = this.array1.indexOf('wael')
+  console.log(indexOfObject1)
+if(indexOfObject1==-1){
+  console.log(this.array2)
+  this.addcontact2('wael',this.array2[indexOfObject])
+  this.deletecontact()
+  this.userservice.currentaccount=''
+}
+else
+{
+  alert('already exists')
+}
+});
+}
 }
 
 
@@ -80,7 +112,7 @@ console.log(this.array1)
 console.log(this.array2)
 console.log(this.contacts)
 this.userservice.currentaccount=''
-this.router.navigate(['/contact'])
+this.router.navigate(['/Contacts'])
   }
 }
 

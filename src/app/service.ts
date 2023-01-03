@@ -48,7 +48,7 @@ export class ApiserveService {
     return this.http.request('delete', `${environment.api_url}deletemail/${email}/${filename}`, {body: mail})
   }
   deletefolder(mail:Mail,email:string,filename:string){
-
+    //`${environment.api_url}delete/${}/${filename}`
      return this.http.request('delete', "http://localhost:8080/deletefolder/ahmed@mail.com/wael",{body:mail})
   }
 
@@ -72,8 +72,8 @@ export class ApiserveService {
   sort(email:string,filename:string,type:any): Observable<any>{
     return this.http.get("http://localhost:8080/"+"sort/"+email+"/"+filename+"/"+type);
   }
-  SendToDraft(email:string,mail:string): Observable<any> {
-    return this.http.post("http://localhost:8080/"+"addcontact/"+email,mail);
+  SendToDraft(email:string,mail:Mail): Observable<any> {
+    return this.http.post("http://localhost:8080/adddraft/"+email,mail);
   }
   reload(email:string): Observable<any> {
     return this.http.get("http://localhost:8080/"+"filesreload/"+email);

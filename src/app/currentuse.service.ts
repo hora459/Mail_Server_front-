@@ -14,6 +14,7 @@ export class CurrentuseService {
   id=0
   currentaccount:string=''
   currentmails:Mail[]=[]
+  currentmail!:Mail;
   currfolder:string="";
   currentfolders:any[]=[]
   

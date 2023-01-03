@@ -114,4 +114,34 @@ for(var i = 0; i < str_array.length; i++) {
       })
     }
   }
+  sendtodraft(to:any,subject:any,importance:any,text:any){
+    this.formData=new FormData()
+    for (const w of this.attachedFile) {
+      this.formData.append('attachment', w);
+      console.log(w)
+    }
+    this.to=to;
+    this.subject=subject
+    this.body=text
+    this.priority=importance
+
+    var str_array = this.to.split(',');
+
+for(var i = 0; i < str_array.length; i++) {
+   // Trim the excess whitespace.
+   console.log(str_array.length)
+   alert(str_array[i])
+   // Add additional code here, such as:
+   this.mail = this.buildmail.build_mail(this.currentuser, str_array[i], this.subject, this.body, this.priority, this.attachedFileName,Date.now())
+   console.log(this.mail)
+
+    this.service.SendToDraft(this.userservice.currentuser,this.mail).subscribe(res=>{
+      console.log(res)
+    })
+  }
+
+  this.router.navigate(['/homepage'])
+  
 }
+  
+  }

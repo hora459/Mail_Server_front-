@@ -12,6 +12,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import {ComposeComponent} from './compose/compose.component';
 import { ContactComponent } from './contact/contact.component';
 import { MatIconModule } from '@angular/material/icon';
+import { EmailComponent } from './email/email.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
    HomepageComponent,
    SidebarComponent,
    ContactComponent,
+   EmailComponent,
 
   ],
   imports: [

@@ -33,6 +33,14 @@ closeResult: string | undefined;
    ngOnInit(): void {
 
   }
+  setmail(date:string){
+    for(var i=0;i<this.userservice.currentmails.length;i++){
+      if(date==this.userservice.currentmails[i].date){
+        this.userservice.currentmail=this.userservice.currentmails[i]
+      }
+    }
+  
+    }
   attachedFileName: String[] = []
   attachedFileUrl: any[] = []
   selectsearchorsortoption(event:any){

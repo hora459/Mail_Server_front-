@@ -1,43 +1,9 @@
-<!-- <div class="loginbox">
-    <!-- <button (click)="show()">show</button>
-    <label for="pwd">from</label>
-    <input type="text" id="pwd1" value={{currentuser}} name="pwd" #from readonly>
-    <br><br>
-    <label for="pwd1">to</label>
-    <input type="text" multiple [(ngModel)]="to" id="pwd1" name="pwd1" >
-    <br><br>
-    <label for="pwd2">Subject</label>
-    <input type="text" [(ngModel)]="subject" id="pwd2" name="pwd2">
-    <br><br>
-    <label for="pwd4">enter priority from 1 to 5</label>
-    <input type="text" [(ngModel)]="priority" id="pwd4" name="pwd4">
-    <br><br>
-    <label for="pwd3">body</label>
-    <textarea id="pwd3" [(ngModel)]="body" class="p" name="pwd3"></textarea>
-    <br>
-    <button (click)="send()">send</button>
-    <br>
-    <div class="att">
-        <div class="Attach">
-        <input type="file" (change)="select($event)" style="display: none;" #fileInput>
-        <button class="fathy" (click)="fileInput.click()">ahmed</button>
-        </div>
-        <div class="labels" *ngFor="let file of attachedFileName;let i = index">
-            <div >
-                <a id="{{ file }}" [href]="attachedFileUrl[i]" target="_blank" style="display: inline;">{{file}}</a>
-                <button (click)="remove(i)">x</button>
-            </div>
-    
-        </div>
-        
-     </div>
-    </div> -->
-    <div style="display: flex; flex-direction: column; background-image:url('./assets/img/back.webp')">
+<div style="display: flex; flex-direction: column; background-image:url('./assets/img/back.webp')">
         <div class="top">
             <img src="./assets/img/mail.jpg">
             <a routerLink="/homepage" id="header">YAA<span style="color:rgb(250, 97, 41); ">M</span>ail</a>
             <div class="sidebuttons">
-                <a routerLink="/compose"><img alt ="Contacts" src="./assets/img/contacts-77.png"><span class="tooltiptext">Contacts</span>
+                <a routerLink="/Contacts"><img alt ="Contacts" src="./assets/img/contacts-77.png"><span class="tooltiptext">Contacts</span>
                 </a>
                 <a routerLink="/SignIn"><img style="margin-left: 8px;" alt ="Logout" src="./assets/img/logout.png"><span class="tooltiptext">Logout</span>
                 </a>
@@ -47,8 +13,9 @@
             <app-sidebar></app-sidebar>
             <div class="section two">
                 <div class="compose">
+                    <button id="cancel" routerLink="/homepage">X</button>
                     <label for="to">To:</label>
-                    <input type="text" id="to" name="to" >
+                    <input type="text" id="to" name="to">
                     <label for="subject">Subject:</label>
                     <input type="text" id="subject" name="subject">
                     <label for="importance">Importance:</label>
@@ -58,12 +25,12 @@
                     <div style="display:flex;">
                     <div class="att" style="display:flex;width:120vh;">
                         <div class="Attach">
-                        <input type="file" (change)="select($event)" style="display: none;" #fileInput multiple>
-                        <button id="attach" (click)="fileInput.click()">Attach</button>
+                        <input type="file" (change)="select($event)" style="display: none;" multiple #fileInput >
+                        <button id="attach" (click)="fileInput.click();">Attach</button>
                         </div>
                         <div class="labels" *ngFor="let file of attachedFileName;let i = index">
-                            <div >
-                                <a id="{{ file }}" [href]="attachedFileUrl[i]" target="_blank" style="display: inline; text-decoration: none;">{{file}}</a>
+                            <div class="doneattach" style="margin-top: 10px; margin-right:3px;">
+                                <a id="{{ file }}" [href]="attachedFileUrl[i]" target="_blank">{{file}}</a>
                                 <button (click)="remove(i)">x</button>
                             </div>
                         </div>

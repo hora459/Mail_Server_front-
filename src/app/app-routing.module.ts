@@ -12,7 +12,8 @@ const routes: Routes = [
    {path:'signup',component:SignupComponent},
    {path:'homepage',component:HomepageComponent},
    {path:'sidebar',component:SidebarComponent},
-   {path:'Contacts',component:ContactComponent}
+   {path:'Contacts',component:ContactComponent},
+  
 
 ];
 

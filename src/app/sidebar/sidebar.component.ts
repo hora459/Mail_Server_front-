@@ -40,22 +40,22 @@ reload(){
 
         this.folders[index].mailIds=map[key]
       }
-      else if(key=='inbox.json'){
+      else if(key=='inbox'){
         var index= 0
             this.folders[index].mailIds=map[key]
       }
-      else if(key=='sent.json'){
+      else if(key=='sent'){
         var index= 1;    
     
         this.folder=this.folders[index]
         console.log(this.folders)
             this.folders[index].mailIds=map[key]
       }
-      else if(key=='draft.json'){
+      else if(key=='draft'){
         var index= 2
             this.folders[index].mailIds=map[key]
       }
-      else if(key=='contacts.json'){
+      else if(key=='contacts'){
 
       }
 

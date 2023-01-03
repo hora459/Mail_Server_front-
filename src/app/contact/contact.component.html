@@ -51,11 +51,11 @@
         <div class="contactopt">
           <div  style="display: flex; margin-top: 15px; margin-right: 400px;">
             <input type="text" placeholder="Search for Contact" #searchbox style="width:25vh;height:30px;margin:5px 10px;border-radius: 10px;">
-            <a id="search"><img alt ="Add" src="./assets/img/right2.png">
+            <a id="search" ><img alt ="search" src="./assets/img/right2.png">
             </a>
           </div>
           <div class="sidebuttons">
-            <a><img alt ="Add" src="./assets/img/add.webp">
+            <a><(click)="addcontact()" img alt ="Add" src="./assets/img/add.webp">
               <span class="tooltiptext">Add Contact</span>
             </a>
           </div>
@@ -85,7 +85,6 @@
             </thead>
             <tbody *ngFor = "let folder of array1; let i=index">
               <tr>
-                  <!-- <td><input  [(ngModel)]="checkes[i]"  style="margin-right: 3px;">{{folder}}</td> -->
                   <td>
                     <span style="margin-right: 30px;" *ngFor="let contact2 of array2[i]">
                     {{contact2}}

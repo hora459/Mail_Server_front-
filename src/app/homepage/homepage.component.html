@@ -22,7 +22,7 @@
             </div>
             <div id="dropdownopt" class="dropdown" style="display:none;">
                 <label style="font-size: 15px; font-weight: bold;margin-right: 5px;"> Sort/Search by </label>
-                <select name="Options" id="Options">
+                <select name="Options" id="Options" (change)="selectsearchorsortoption($event)">
                 <option value=""></option>
                 <option value="from" >From</option>
                 <option value="subject">Subject</option>
@@ -31,6 +31,7 @@
                 <option value="priority">Priority</option>
                 <option value="Subject">Date</option>
             </select>
+            <button (click)="sort()">sort</button>
             </div>
             <div id="search" style="display: none;">
                 <div  style="display: flex;">
@@ -50,11 +51,11 @@
                 </tr>
             </thead>
                 <tbody *ngFor = "let email of currentemails; let i=index">
-                <tr (click)="setmail(email.date)" routerLink="/Mail">
+                <tr>
                     <td  ><input type="checkbox" [(ngModel)]="checkes[i]" (ngModelChange)="getValuesChecked()" style="margin-right: 3px;">{{email.from}}</td>
-                    <td>{{email.body}}</td>
-                    <td>{{email.date}}</td>
-                    <td class="priority"><img src="./assets/img/yellow.png"> {{email.priority}}</td>
+                    <td (click)="setmail(email.date)" routerLink="/Mail">{{email.body}}</td>
+                    <td (click)="setmail(email.date)" routerLink="/Mail">{{email.date}}</td>
+                    <td (click)="setmail(email.date)" routerLink="/Mail" class="priority"><img src="./assets/img/yellow.png"> {{email.priority}}</td>
                 </tr>
             </tbody>
             </table>

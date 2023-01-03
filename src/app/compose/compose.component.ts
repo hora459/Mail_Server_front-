@@ -127,11 +127,16 @@ for(var i = 0; i < str_array.length; i++) {
     }
   }
   sendtodraft(to:any,subject:any,importance:any,text:any){
+    
     this.formData=new FormData()
     for (const w of this.attachedFile) {
       this.formData.append('attachment', w);
       console.log(w)
     }
+    this.to='';
+    this.subject=''
+    this.body=''
+    this.priority=0
     this.to=to;
     this.subject=subject
     this.body=text

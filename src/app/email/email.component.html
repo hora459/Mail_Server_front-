@@ -20,11 +20,16 @@
             </div>
             <div style="display:flex;height: 60px; border:1px solid black; border-radius: 15px; margin:0px 5px">
             <div class="priority"><img src="./assets/img/star.jpg"><span style="margin-left: 5px; font-weight: bold; margin-top:5px">{{thatmail.priority}}</span></div>
-            <div class="from"><span>{{thatmail.from}}</span><span id="tome">to me</span></div>
+            <div class="from"><span>from:{{thatmail.from}}</span></div>
             <div class="date"> <span>{{thatmail.date}}</span></div>
             </div>
             <div class="body"><p>{{thatmail.body}}</p></div>
-            <div class="attachment">{{thatmail.attachment}}</div>
+            <div class="labels" *ngFor="let file of attachedFileUrl;let i = index">
+                <div >
+                    <a id="att" [href]="file" target="_blank" style="display: inline;">{{attachedFileName[i]}}</a>
+                </div>
+    
+            </div>
 
         </div> 
 

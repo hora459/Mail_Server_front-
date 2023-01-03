@@ -48,8 +48,7 @@ export class ApiserveService {
     return this.http.request('delete', `${environment.api_url}deletemail/${email}/${filename}`, {body: mail})
   }
   deletefolder(mail:Mail,email:string,filename:string){
-    //`${environment.api_url}delete/${}/${filename}`
-     return this.http.request('delete', "http://localhost:8080/deletefolder/ahmed@mail.com/wael",{body:mail})
+     return this.http.request('delete',  `${environment.api_url}delete/${email}/${filename}`,{body:mail})
   }
 
   addfile(email:string,filename:string){

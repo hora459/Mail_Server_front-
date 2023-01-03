@@ -33,6 +33,7 @@ closeResult: string | undefined;
    ngOnInit(): void {
 
   }
+
   setmail(date:string){
     for(var i=0;i<this.userservice.currentmails.length;i++){
       if(date==this.userservice.currentmails[i].date){
@@ -105,7 +106,7 @@ getValuesChecked()
   console.log(this.checkes) 
 }
 sort(){
-
+alert(this.sortoption)
 if(this.sortoption!=''){
   alert(this.sortoption);
   if(this.userservice.currfolder=='')

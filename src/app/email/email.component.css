@@ -220,4 +220,10 @@ a{
     height:40px;
     background-color: white;
     border-radius: 10px;
-    background-color: dar
+    background-color: darkgray;
+    margin-left: 10px;
+}
+#cancel:hover{
+    background-color: firebrick;
+    transform: translateY(-3px);
+}

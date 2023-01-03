@@ -9,6 +9,7 @@ import {Ifolder} from '../Ifolder';
 import { Mail } from '../mail';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -17,7 +18,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class HomepageComponent implements OnInit {
 
 
-  constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService) {
+  constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,
+    private userservice:CurrentuseService) {
    }
 currentemails:Mail[]=[];
 search=''
@@ -25,6 +27,8 @@ option:string="";
 sortoption:string="";
 searchoption:string=""
 checkes:boolean[]=[]
+mails:Mail[]=[]
+closeResult: string | undefined;
 
    ngOnInit(): void {
 
@@ -107,7 +111,55 @@ if(this.sortoption!=''){
     })
   }
 }
+}
+bulkdelete(){
+
+  this.mails=[]
+  for (let i = 0; i < this.checkes.length; i++) {
+    if(this.checkes[i]==true){
+      this.mails.push(this.currentemails[i])
+    }
   }
-
-
+  this.service.deletemail(this.mails,this.userservice.currentuser,this.userservice.currfolder).subscribe(res=>{
+    console.log(res)
+    this.userservice.reload()
+  })
+}
+bulkmove(filename:any){
+  var flag=true
+for(let entry of this.userservice.currentfolders){
+  if(filename==entry.name){
+    flag=false;
+  }
+}
+if(flag==true){
+  alert('filename is not found')
+}
+else {
+  for (let i = 0; i < this.checkes.length; i++) {
+    if(this.checkes[i]==true){
+      this.mails.push(this.currentemails[i])
+    }
+  }
+ this.service.movemails(this.mails,this.userservice.currentuser,this.userservice.currfolder,filename).subscribe(res=>{
+  console.log(res)
+ })}
+ this.userservice.reload()
+}
+private getDismissReason(reason: any): string {
+  if (reason === ModalDismissReasons.ESC) {
+    return 'by pressing ESC';
+  } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    return 'by clicking on a backdrop';
+  } else {
+    return `with: ${reason}`;
+  }
+}
+opena(content: any) {
+  this.modalservice.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
 }

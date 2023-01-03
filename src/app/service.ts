@@ -44,11 +44,12 @@ export class ApiserveService {
   search(currentuser:any,currentfolder:any,type:any,name:any):Observable<any>{
     return this.http.get("http://localhost:8080/"+"filter/"+currentuser+"/"+currentfolder+"/"+type+"/"+name);
   }
-  deletemail(mail:Mail,email:string,filename:string){
+  deletemail(mail:Mail[],email:string,filename:string){
     return this.http.request('delete', `${environment.api_url}deletemail/${email}/${filename}`, {body: mail})
   }
-  deletefolder(email:string,filename:string){
-    return this.http.request('delete', `${environment.api_url}deletemail/${email}/${filename}`)
+  deletefolder(mail:Mail,email:string,filename:string){
+
+     return this.http.request('delete', "http://localhost:8080/deletefolder/ahmed@mail.com/wael",{body:mail})
   }
 
   addfile(email:string,filename:string){
@@ -76,5 +77,8 @@ export class ApiserveService {
   }
   reload(email:string): Observable<any> {
     return this.http.get("http://localhost:8080/"+"filesreload/"+email);
+  }
+  movemails(mails:Mail[],currentemail:any,currentfile:any,destination:any): Observable<any>{
+    return this.http.post("http://localhost:8080/"+"moveemail/"+currentemail+"/"+currentfile+"/"+destination,mails);
   }
 }

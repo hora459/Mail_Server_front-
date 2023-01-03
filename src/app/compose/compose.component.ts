@@ -67,7 +67,7 @@ export class ComposeComponent implements OnInit {
       this.formData.append('attachment', w);
       console.log(w)
     }
-
+alert(this.to)
     var str_array = this.to.split(',');
 
 for(var i = 0; i < str_array.length; i++) {

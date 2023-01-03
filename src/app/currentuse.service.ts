@@ -15,9 +15,11 @@ export class CurrentuseService {
   currentaccount:string=''
   currentmails:Mail[]=[]
   currfolder:string="";
+  currentfolders:any[]=[]
   
   constructor(private modalservice:NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router) { }
   reload(){
+
     this.service.reload(this.currentuser)
   }
 }

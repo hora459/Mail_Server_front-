@@ -21,13 +21,14 @@ export class SidebarComponent implements OnInit {
   closeResult: string | undefined;
   constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService,private homepage:HomepageComponent) { 
     this.folders=[{name:"inbox",mailIds:0},{name:"sent",mailIds:0},{name:"draft",mailIds:0},{name:"trash",mailIds:0}]
-
     this.reload();
   }
   ngOnInit(): void {
   
   }
 reload(){
+  this.homepage.currentemails=[]
+  this.userservice.currfolder=''
   this.service.reload(this.userservice.currentuser).subscribe((res:any)=>{
     console.log(res);
     type myMap = Record<number, any>;
@@ -35,7 +36,7 @@ reload(){
     this.folders=[{name:"inbox",mailIds:0},{name:"sent",mailIds:0},{name:"draft",mailIds:0},{name:"trash",mailIds:0}]
    
     for (const key in map) {
-      if(key=='trash.json'){
+      if(key=='trash'){
     var index= 3;
 
         this.folders[index].mailIds=map[key]
@@ -64,6 +65,7 @@ reload(){
   this.folders.push(this.folder)
     }}
   })
+  this.userservice.currentfolders=this.folders
 }
   addfile(filename:string){
     if(this.folders.length==8){
@@ -123,7 +125,9 @@ Deletefolder(){
     const indexOfObject = this.folders.findIndex((object) => {
       return object.name === this.userservice.currfolder;
     });
-    this.service.deletefolder(this.userservice.currentuser,this.userservice.currfolder)
+    this.service.deletefolder(new Mail(),this.userservice.currentuser,this.userservice.currfolder).subscribe(res=>{
+      console.log(res)
+    })
     this.folders.splice(indexOfObject,1);
     this.userservice.currfolder="";
     alert("Folder Deleted Successfully");

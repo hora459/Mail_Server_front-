@@ -68,8 +68,8 @@ export class ApiserveService {
   renamecontact(email:string,name:string,email1:string){
     return this.http.get("http://localhost:8080/"+"renamecontact/"+email+"/"+name+"/"+email1,{responseType:'text'});
   }
-  sort(email:string,filename:string,type:any): Observable<any>{
-    return this.http.get("http://localhost:8080/"+"sort/"+email+"/"+filename+"/"+type);
+  sort(email:string,filename:string,op:any,type:any): Observable<any>{
+    return this.http.get("http://localhost:8080/"+"sort/"+email+"/"+filename+"/"+op+"/"+type);
   }
   SendToDraft(email:string,mail:Mail): Observable<any> {
     return this.http.post("http://localhost:8080/adddraft/"+email,mail);
@@ -82,5 +82,8 @@ export class ApiserveService {
   }
   searchcontacts(currentuser:any,name:any){
     return this.http.get("http://localhost:8080/"+"filtercontact/"+currentuser+"/"+name);
+  }
+  sortcontact(email:string,type:any): Observable<any>{
+    return this.http.get("http://localhost:8080/"+"sortcontact/"+email+"/"+type);
   }
 }

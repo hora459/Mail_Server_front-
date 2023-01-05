@@ -17,7 +17,12 @@ export class CurrentuseService {
   currentmail!:Mail;
   currfolder:string="";
   currentfolders:any[]=[]
-  
+  draftedmail!:Mail;
+  attachedFile: File[] = []
+  attachedFileName: String[] = []
+  attachedFileUrl: any[] = []   
+  Reply!: string;
+  page=1
   constructor(private modalservice:NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router) { }
   reload(){
 

@@ -24,7 +24,7 @@
           </div>
           <div id="dropdownsort" class="dropdown" style="display: none; margin-top: 0px;">
               <label style="font-size: 15px; font-weight: bold;margin-right: 5px;"> Sort Option </label>
-              <select style="background-color:rgba(0, 255, 255, 0.603);font-weight: bold;">
+              <select (change)="sortoption($event)" style="background-color:rgba(0, 255, 255, 0.603);font-weight: bold;">
               <option></option>
               <option value="Ascendingly">Ascendingly</option>
               <option value="Descendingly">Descendingly</option>
@@ -32,7 +32,7 @@
           </div>
           <div id="sort" style="display: none;">
             <div class="searchbutton" style="display: flex;">
-                <a >Apply</a>
+                <a (click)="sortcontact()">Apply</a>
             </div>
           </div>
           

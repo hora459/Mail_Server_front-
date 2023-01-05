@@ -17,7 +17,16 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ComposeComponent implements OnInit {
 
-  constructor(private service: ApiserveService, private http: HttpClient, private router: Router, private userservice: CurrentuseService, public sanitizer: DomSanitizer) { }
+  constructor(private service: ApiserveService, private http: HttpClient, private router: Router, private userservice: CurrentuseService, public sanitizer: DomSanitizer) { 
+    this.draftmail=userservice.draftedmail
+    this.attachedFile=userservice.attachedFile
+    this.attachedFileName=userservice.attachedFileName
+    this.attachedFileUrl=userservice.attachedFileUrl
+    if(this.draftmail.priority!=0){
+      this.priority=this.draftmail.priority
+      
+    }
+  }
   ngOnInit(): void {
   }
   to!:string
@@ -29,6 +38,7 @@ export class ComposeComponent implements OnInit {
   attachedFileName: String[] = []
   attachedFileUrl: any[] = []
   formData = new FormData();
+  draftmail!:Mail
   c = 0
   x1: any
   x2: any
@@ -128,8 +138,8 @@ let formattedTime = date.toLocaleTimeString('en-US', {day:"2-digit",year:"numeri
       })
     }
   }
-  sendtodraft(to:any,subject:any,importance:any,text:any){
-    
+  sendtodraft(to:any,subject:any,text:any,importance:any,att:any){
+    this.attachedFile=att
     this.formData=new FormData()
     for (const w of this.attachedFile) {
       this.formData.append('attachment', w);
@@ -143,23 +153,22 @@ let formattedTime = date.toLocaleTimeString('en-US', {day:"2-digit",year:"numeri
     this.subject=subject
     this.body=text
     this.priority=importance
-
-    var str_array = this.to.split(',');
-
-for(var i = 0; i < str_array.length; i++) {
    // Trim the excess whitespace.
-   console.log(str_array.length)
-   alert(str_array[i])
+
    let date = new Date();
 let formattedTime = date.toLocaleTimeString('en-US', {day:"2-digit",year:"numeric",month:"2-digit",hour: '2-digit', minute: '2-digit', second: '2-digit'});
    // Add additional code here, such as:
-   this.mail = this.buildmail.build_mail(this.currentuser, str_array[i], this.subject, this.body, this.priority, this.attachedFileName,formattedTime)
+   this.mail = this.buildmail.build_mail(this.currentuser, this.to, this.subject, this.body, this.priority, this.attachedFileName,formattedTime)
    console.log(this.mail)
-
+    console.log(att)
     this.service.SendToDraft(this.userservice.currentuser,this.mail).subscribe(res=>{
       console.log(res)
     })
-  }
+    console.log(this.formData)
+  //   this.service.send(this.formData,this.currentuser, this.currentuser).subscribe(res => {
+  //     console.log(res)
+  // })
+  
   this.router.navigate(['/homepage'])
   
 }

@@ -7,6 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Router } from '@angular/router';
+import { MailBuilder } from '../mail-builder';
 
 @Component({
   selector: 'app-email',
@@ -16,18 +17,47 @@ import { Router } from '@angular/router';
 export class EmailComponent implements OnInit {
   currentemails:Mail[]=[];
   thatmail!:Mail
+  
+Reply!:string
 list:any
-  x2:any
-  attachedFile: File[] = []
+x2:any
+mails:Mail[]=[]
+attachedFile: File[] = []
   attachedFileName: String[] = []
   attachedFileUrl: any[] = []
   constructor(private service: ApiserveService, private http: HttpClient, private router: Router, private userservice: CurrentuseService, public sanitizer: DomSanitizer) { 
     this.thatmail=this.userservice.currentmail
       this.list=this.thatmail.attachment
+      if(userservice.Reply=='sent'){this.Reply="Reply"}
+      else if(userservice.Reply=='draft'){this.Reply="edit"}
+      else{this.Reply='Compose'}
       this.show()
   }
 
   ngOnInit(): void {
+  }
+  edit(){
+    if(this.userservice.Reply=='sent'){
+        this.router.navigate(['/compose'])
+    }
+    else if(this.userservice.Reply=='draft'){
+    let build =new MailBuilder()
+    this.userservice.draftedmail=build.build_mail_by_mail(this.thatmail)
+    this.userservice.attachedFile=this.attachedFile
+    this.userservice.attachedFileName=this.attachedFileName
+    this.userservice.attachedFileUrl=this.attachedFileUrl
+  
+    this.mails.push(this.userservice.draftedmail)
+    this.service.deletemail(this.mails,this.userservice.currentuser,'draft').subscribe(res=>console.log(res))
+    this.service.deletemail(this.mails,this.userservice.currentuser,'trash').subscribe(res=>console.log(res))
+    console.log(this.userservice.draftedmail)
+    this.router.navigate(['/compose'])
+    }
+    else{
+      this.router.navigate(['/compose'])
+    }
+
+    
   }
   show() {    
     console.log(this.list)

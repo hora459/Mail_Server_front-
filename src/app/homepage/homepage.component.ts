@@ -21,9 +21,11 @@ export class HomepageComponent implements OnInit {
 constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,
     private userservice:CurrentuseService) {
       userservice.currfolder2="inbox";
-      
+      this.username=this.userservice.currentuser.slice(0, userservice.currentuser.indexOf("@"));
+      this.page=this.userservice.page
+    
     }
-username:string='Yousef'
+username!:string
 currentemails:Mail[]=[];
 search=''
 option:string="";
@@ -33,6 +35,7 @@ checkes:boolean[]=[]
 mails:Mail[]=[]
 closeResult: string | undefined;
 page:number=1
+ascending="true"
    ngOnInit(): void {
 
   }
@@ -48,11 +51,13 @@ page:number=1
   attachedFileName: String[] = []
   attachedFileUrl: any[] = []
   selectsearchorsortoption(event:any){
+
     if(this.option=='Search'){
       this.searchoption=event.target.value
       alert(this.searchoption)
     }
     else{
+      alert("sort")
       this.sortoption=event.target.value
       alert(this.sortoption)
     }
@@ -74,6 +79,7 @@ else {
   }
   
   show(array:any){
+    this.page=1
   this.currentemails=array
   console.log(this.currentemails)
   this.checkes=[]
@@ -83,7 +89,11 @@ else {
   }}
   }
 selectasc(event:any){
-alert(event.target.value);
+  if (event.target.value=="Descendingly")
+  this.ascending="false"
+  else if (event.target.value=="Ascendingly")
+  this.ascending="true"
+  else alert("please choose valid option")
 }
 
 selectoption(event:any){
@@ -128,8 +138,7 @@ if(this.sortoption!=''){
   if(this.userservice.currfolder=='')
   alert('you have to select a folder')
   else {
-    this.service.sort(this.userservice.currentuser,this.userservice.currfolder,this.sortoption).subscribe((res:Mail[])=>{
-      
+    this.service.sort(this.userservice.currentuser,this.userservice.currfolder,this.sortoption,this.ascending).subscribe((res:Mail[])=>{
       this.show(res);
       console.log(res);
       alert(res)
@@ -137,6 +146,12 @@ if(this.sortoption!=''){
   }
 }
 }
+
+
+
+
+
+
 bulkdelete(){
 
   this.mails=[]

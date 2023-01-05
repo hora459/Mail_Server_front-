@@ -16,7 +16,7 @@
             <div class="subject">
             <button id="cancel" routerLink="/homepage">X</button>
             <a><span style="font-weight: bold;">Subject: </span>{{thatmail.subject}}</a>
-            <button  routerLink="/compose"><img src="./assets/img/reply.jpg">Reply</button>
+            <button  (click)="edit()"><img src="./assets/img/reply.jpg">{{Reply}}</button>
             </div>
             <div style="display:flex;height: 60px; border:1px solid black; border-radius: 15px; margin:0px 5px">
             <div class="priority"><img src="./assets/img/star.jpg"><span style="margin-left: 5px; font-weight: bold; margin-top:5px">{{thatmail.priority}}</span></div>
@@ -27,7 +27,11 @@
             <div class="date"> <span>{{thatmail.date}}</span></div>
             </div>
             <div class="body"><p>{{thatmail.body}}</p></div>
-            <div class="attachment"><span>{{thatmail.attachment}}</span></div> 
+            <div class="attachment" style="display: flex;">
+                <div  *ngFor="let file of attachedFileUrl;let i = index">
+                <a [href]="file" target="_blank" ><span>{{attachedFileName[i]}}</span></a>  
+                </div>
+            </div>
         </div>  
     </div>
 </div>

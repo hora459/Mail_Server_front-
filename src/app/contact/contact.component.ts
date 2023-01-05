@@ -19,6 +19,7 @@ export class ContactComponent implements OnInit {
  array1:string[]=[];
  array2:string[][]=[[]];
  option:string="";
+ sorting:any
 
    contacts: Map<string, string[]> = new Map([
  ['',['']]
@@ -56,7 +57,7 @@ this.service.addcontact(this.userservice.currentuser,contactname,emails).subscri
 addcontact2(contactname:any,emails:string[]){
 this.contacts.set(contactname,emails);
 console.log(emails)
-this.service.addcontact(this.userservice.currentuser,'wael',emails).subscribe(res=>{
+this.service.addcontact(this.userservice.currentuser,contactname,emails).subscribe(res=>{
   console.log(res)
   this.loadcontacts()
 });
@@ -79,6 +80,55 @@ console.log(this.array2)
 this.router.navigate(['/Contacts'])
 })
 }
+
+
+sortoption(event:any){
+  this.sorting=event.target.value;
+  console.log(this.sorting)
+}
+sortcontact(){
+  if(this.sorting=='') alert("You have to choose option")
+  else if(this.sorting=="Ascendingly") 
+  this.service.sortcontact(this.userservice.currentuser,"true").subscribe((res:any)=>{
+    if(res!=null){
+      console.log(res)
+      this.array1=[];
+      this.array2=[[]];
+      type myMap = Record<any, any>;
+      const contactss: myMap = res;
+      console.log(contactss)
+      for (const key in contactss) {
+        this.array1.push(key)
+      this.array2.push(contactss[key]);
+      }
+    }
+  console.log(this.array2)
+  })
+  else if(this.sorting=="Descendingly") this.service.sortcontact(this.userservice.currentuser,"false").subscribe((res:any)=>{
+    if(res!=null){
+      console.log(res)
+      this.array1=[];
+      this.array2=[[]];
+      type myMap = Record<any, any>;
+      const contactss: myMap = res;
+      console.log(contactss)
+      for (const key in contactss) {
+        this.array1.push(key)
+      this.array2.push(contactss[key]);
+      }
+    }
+  console.log(this.array2)
+  })
+
+
+}
+
+
+
+
+
+
+
 editcontact(filename:any){
 
  

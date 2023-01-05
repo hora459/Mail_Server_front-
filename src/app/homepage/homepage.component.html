@@ -57,7 +57,7 @@
             </div>
             <div id="sort" style="display: none;">
               <div class="searchbutton" style="display: flex;">
-                  <a (click)="search1(searchbox.value)">Apply</a>
+                  <a (click)="sort()">Apply</a>
               </div>
           </div>
             
@@ -104,7 +104,7 @@
         <tr>
             <td> <input type="checkbox" [(ngModel)]="checkes[i]" (ngModelChange)="getValuesChecked()" style="margin-right: 3px;">{{email.from}}</td>
             <td (click)="setmail(email.date)" routerLink="/Mail">{{email.to}}</td>
-            <td (click)="setmail(email.date)" routerLink="/Mail">{{email.body}}</td>
+            <td (click)="setmail(email.date)" routerLink="/Mail">{{email.subject}}</td>
             <td (click)="setmail(email.date)" routerLink="/Mail">{{email.date}}</td>
             <td (click)="setmail(email.date)" routerLink="/Mail" class="priority"><img src="./assets/img/yellow.png"> {{email.priority}}</td>
         </tr>

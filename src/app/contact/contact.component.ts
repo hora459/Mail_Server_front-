@@ -18,6 +18,7 @@ import { map } from 'rxjs';
 export class ContactComponent implements OnInit {
  array1:string[]=[];
  array2:string[][]=[[]];
+ option:string="";
 
    contacts: Map<string, string[]> = new Map([
  ['',['']]
@@ -133,6 +134,28 @@ this.router.navigate(['/Contacts'])
   }
 }
 
+selectoptionn(event:any){
+  this.option= event.target.value;
+  console.log(this.option);
+  
+  if(this.option=="Search"){
+    document.getElementById("search")!.style.display="block";
+    document.getElementById("sort")!.style.display="none";
+    document.getElementById("dropdownsort")!.style.display="none";
+  }
+  else if(this.option=="Sort"){
+    document.getElementById("search")!.style.display="none";
+    document.getElementById("sort")!.style.display="block";
+    document.getElementById("dropdownsort")!.style.display="block";
+  
+  }else{
+    document.getElementById("search")!.style.display="none";
+    document.getElementById("sort")!.style.display="none";
+    document.getElementById("dropdownsort")!.style.display="none";
+  
+  }
+  
+  }
 
 private getDismissReason(reason: any): string {
   if (reason === ModalDismissReasons.ESC) {

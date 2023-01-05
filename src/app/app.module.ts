@@ -11,8 +11,10 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import {ComposeComponent} from './compose/compose.component';
 import { ContactComponent } from './contact/contact.component';
-import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 import { EmailComponent } from './email/email.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,7 @@ import { EmailComponent } from './email/email.component';
     NgbModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatIconModule
+    NgxPaginationModule,
   ],
   providers: [HttpClient,HomepageComponent],
   bootstrap: [AppComponent]

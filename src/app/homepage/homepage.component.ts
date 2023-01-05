@@ -29,7 +29,7 @@ searchoption:string=""
 checkes:boolean[]=[]
 mails:Mail[]=[]
 closeResult: string | undefined;
-
+page:number=1
    ngOnInit(): void {
 
   }
@@ -82,6 +82,7 @@ else {
 selectasc(event:any){
 alert(event.target.value);
 }
+
 selectoption(event:any){
   this.option= event.target.value;
   console.log(this.option);
@@ -90,24 +91,26 @@ selectoption(event:any){
     document.getElementById("dropdownoptsearch")!.style.display="block";
     document.getElementById("dropdownoptsort")!.style.display="none";
     document.getElementById("search")!.style.display="block";
+    document.getElementById("sort")!.style.display="none";
     document.getElementById("dropdownsort")!.style.display="none";
   }
   else if(this.option=="Sort"){
     document.getElementById("dropdownoptsearch")!.style.display="none";
     document.getElementById("dropdownoptsort")!.style.display="block";
     document.getElementById("search")!.style.display="none";
+    document.getElementById("sort")!.style.display="block";
     document.getElementById("dropdownsort")!.style.display="block";
   
   }else{
     document.getElementById("dropdownoptsearch")!.style.display="none";
     document.getElementById("dropdownoptsort")!.style.display="none";
     document.getElementById("search")!.style.display="none";
+    document.getElementById("sort")!.style.display="none";
     document.getElementById("dropdownsort")!.style.display="none";
   
   }
   
   }
-
 
 getValuesChecked()
 {
@@ -188,4 +191,12 @@ restore(){
   else{
 this.bulkmove('restored')}
 }
+
+TableDataChange(event:any)
+{
+  this.page=event;
+
+ 
+}
+
 }

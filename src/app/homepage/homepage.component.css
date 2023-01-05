@@ -157,7 +157,7 @@ transform: translateY(-4px);
 
   
 .topbuttons{
-    margin-left: 5px;
+    margin-left: 15px;
 
 }  
 .topbuttons img{
@@ -198,3 +198,34 @@ transform: translateY(-4px);
     top: -40%;
     margin-left: -75px;
 }
+
+
+.searchbutton a{
+    width:10vh;
+    height:30px;
+    text-align: center;
+    border-radius: 10px;
+    padding-top: 5px;
+    background-color: rgb(165, 42, 42);
+    color: white;
+    font-weight: 500;
+    border:1px solid black;
+}
+.searchbutton a:hover{
+    cursor: pointer;
+    background-color: chartreuse;
+    color: black;
+
+}
+
+pagination-controls {
+    border: 1px solid black;
+    padding-top: 15px;
+    padding-bottom: 0px;
+    font-weight: bold;
+    border-radius: 15px;
+    background-color: rgba(245, 245, 220, 0.705);
+}
+
+
+

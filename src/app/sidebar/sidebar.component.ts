@@ -22,13 +22,14 @@ export class SidebarComponent implements OnInit {
   constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,private userservice:CurrentuseService,private homepage:HomepageComponent) { 
     this.folders=[{name:"inbox",mailIds:0},{name:"sent",mailIds:0},{name:"draft",mailIds:0},{name:"trash",mailIds:0},{name:'restored',mailIds:0}]
     this.reload();
+
   }
   ngOnInit(): void {
-  
   }
 reload(){
   this.homepage.currentemails=[]
   this.userservice.currfolder=''
+  this.userservice.currfolder2=''
   this.service.reload(this.userservice.currentuser).subscribe((res:any)=>{
     console.log(res);
     type myMap = Record<number, any>;
@@ -108,12 +109,17 @@ reload(){
 
   
 Selectfolder(fname:string){
-    this.service.show(fname,this.userservice.currentuser).subscribe((res:Mail[])=>{
-      this.userservice.currentmails=res;
-      this.userservice.currfolder=fname;
-  this.homepage.show(this.userservice.currentmails);
-    });
-
+  //   this.service.show(fname,this.userservice.currentuser).subscribe((res:Mail[])=>{
+  //     this.userservice.currentmails=res;
+  //     this.userservice.currfolder=fname;
+  //     this.userservice.currfolder2=fname;
+  // this.homepage.show(this.userservice.currentmails);
+  //   });
+  this.userservice.currfolder2=fname;
+  for(var x of this.folders){
+    document.getElementById(x.name)!.style.backgroundColor = "darkgray";
+  }
+  document.getElementById(this.userservice.currfolder2)!.style.backgroundColor = "rgba(128, 255, 0, 0.795)";
 }
   
 Deletefolder(){

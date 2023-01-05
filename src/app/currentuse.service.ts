@@ -10,9 +10,9 @@ import { ApiserveService } from './service';
   providedIn: 'root'
 })
 export class CurrentuseService {
-  currentuser=''
-  id=0
-  currentaccount:string=''
+  currentuser='';
+  currfolder2:string='';
+  currentaccount:string='';
   currentmails:Mail[]=[]
   currentmail!:Mail;
   currfolder:string="";

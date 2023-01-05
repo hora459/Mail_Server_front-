@@ -18,6 +18,16 @@
     background-color:rgba(255, 252, 252, 0.658);
 }
 
+#welcome{
+    width:50vh;
+    justify-content: center;
+    text-align: center;
+    color:beige;
+    font-size: 30px;
+    margin: 25px 5px;
+    font-weight: bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-seri
+}
 
 #header{
     flex-flow:row nowrap;
@@ -26,6 +36,7 @@
     color:beige;
     font-size: 40px;
     margin: 25px 5px;
+    margin-right: 30vh;
     font-weight: bold;
     font-stretch:expanded;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
@@ -53,7 +64,7 @@ a{
 
 .sidebuttons {
     display:flex;
-    margin-left: 930px;
+    margin-left: 380px;
     position: relative;
  
 }

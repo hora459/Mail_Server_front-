@@ -18,9 +18,12 @@ import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 export class HomepageComponent implements OnInit {
 
 
-  constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,
+constructor(private modalservice: NgbModal,private service:ApiserveService,private http:HttpClient,private router:Router,
     private userservice:CurrentuseService) {
-   }
+      userservice.currfolder2="inbox";
+      
+    }
+username:string='Yousef'
 currentemails:Mail[]=[];
 search=''
 option:string="";
